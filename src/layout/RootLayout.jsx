@@ -9,7 +9,7 @@ export const RootLayout = () => {
     const [isUserAuth, setisUserAuth] = useState(false)
 
     return (
-    <div>
+    <>
         {isUserAuth ? <UserHeader /> : <Header />}       
 
         <header className="bg-transparent shadow-sm mt-10">
@@ -17,6 +17,6 @@ export const RootLayout = () => {
 
         <Outlet/>
         <Footer/>
-    </div>
+    </>
     )
 }
