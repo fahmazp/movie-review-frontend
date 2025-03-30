@@ -1,6 +1,6 @@
 import { RootLayout } from "@/layout/RootLayout";
-import { About } from "@/pages/user/about";
-import { Home } from "@/pages/user/home";
+import { About } from "@/pages/user/About";
+import { Home } from "@/pages/user/Home";
 import { Profile } from "@/pages/user/Profile";
 import { createBrowserRouter } from "react-router-dom";
 import { ProtectedRoutes } from "./ProtectedRoutes";
