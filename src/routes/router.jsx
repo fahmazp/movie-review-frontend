@@ -8,6 +8,7 @@ import { ErrorPage } from "@/pages/shared/Error-page";
 import { Movies } from "@/pages/user/Movies";
 import { MoviesDetails } from "@/pages/user/MoviesDetails";
 import LoginPage from "@/pages/shared/Loginpage";
+import { AdminLayout } from "@/layout/AdminLayout";
 
 export const router = createBrowserRouter([
 
@@ -61,5 +62,26 @@ export const router = createBrowserRouter([
         },
 
     ],
+  },
+
+  {
+    path:"admin",
+    element: <AdminLayout/>,
+
+    children:[
+      {
+        path: "login",
+        element: <LoginPage/>
+      },
+      {
+        path: "signup",
+      },
+      {
+        path: "crete-movies",
+      },
+      {
+        path: "movies-dashboard",
+      },
+    ]
   }
 ])

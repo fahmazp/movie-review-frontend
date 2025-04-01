@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Footer() {
   return (
     <div className="relative isolate overflow-hidden bg-zinc-900 dark:bg-zinc-950 py-16 sm:py-24 lg:py-32">
@@ -41,9 +43,7 @@ export default function Footer() {
                 {/* <HandRaisedIcon aria-hidden="true" className="size-6 text-white" /> */}
               </div>
               <dt className="mt-4 text-base font-semibold text-white">No spam</dt>
-              <dd className="mt-2 text-base/7 text-gray-400">
-                Officia excepteur ullamco ut sint duis proident non adipisicing. Voluptate incididunt anim.
-              </dd>
+              <Link to="/admin/login" className="underline">Login as Admin</Link>
             </div>
           </dl>
         </div>
