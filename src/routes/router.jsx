@@ -7,8 +7,9 @@ import { ProtectedRoutes } from "./ProtectedRoutes";
 import { ErrorPage } from "@/pages/shared/Error-page";
 import { Movies } from "@/pages/user/Movies";
 import { MoviesDetails } from "@/pages/user/MoviesDetails";
-import LoginPage from "@/pages/shared/Loginpage";
 import { AdminLayout } from "@/layout/AdminLayout";
+import { LoginPageform } from "@/components/shared/login-form";
+
 
 export const router = createBrowserRouter([
 
@@ -28,7 +29,7 @@ export const router = createBrowserRouter([
         },
         {
           path: "login",
-          element: <LoginPage/>
+          element: <LoginPageform/>
         },
         {
           path: "signup",
@@ -42,8 +43,8 @@ export const router = createBrowserRouter([
           path: "moviesDetails/:id",
           element: <MoviesDetails/>
         },
-        
         {
+          path: "user",
           element: <ProtectedRoutes/>,
           children: [
             {
@@ -56,7 +57,7 @@ export const router = createBrowserRouter([
             },
             {
               path: "password-change",
-              element: <h1>password-change</h1>
+              element: <h1>passwordchange</h1>
             },
           ]
         },
@@ -71,17 +72,9 @@ export const router = createBrowserRouter([
     children:[
       {
         path: "login",
-        element: <LoginPage/>
+        element: <LoginPageform role="admin"/>
       },
-      {
-        path: "signup",
-      },
-      {
-        path: "crete-movies",
-      },
-      {
-        path: "movies-dashboard",
-      },
+      
     ]
   }
 ])

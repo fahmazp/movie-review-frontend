@@ -3,8 +3,8 @@ import { Outlet } from "react-router-dom"
 
 export const AdminLayout = () => {
   return (
-    <div>
-       <h1> AdminLayout</h1>
+    <div className="mt-3">
+       <h1 className="text-center text-2xl"> Login as Admin</h1>
        <Outlet/>
        <Footer/>
     </div>

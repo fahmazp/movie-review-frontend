@@ -1,8 +1,5 @@
+import React from "react";
 import { useForm } from "react-hook-form";
-// import { useNavigate } from "react-router-dom";
-// import { useDispatch } from "react-redux";
-// import { saveUser, clearUser } from "@/redux/userSlice";
-// import { toast } from "react-toastify";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -10,55 +7,72 @@ import { Label } from "@/components/ui/label";
 import { ToggleDemo } from "./pswdToggle";
 import { useState } from "react";
 import { axiosInstance } from "@/config/axiosInstance";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { clearUser, saveUser } from "../../redux/features/userSlice";
+// import toast from "react-hot-toast";
 
+export const LoginPageform = ({ role }) => {
+    const { register, handleSubmit } = useForm();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-export function LoginPageform({ role = "user", className, ...props }) {
-  const { register, handleSubmit } = useForm();
-  //   const navigate = useNavigate();
-  // const dispatch = useDispatch();
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const togglePasswordVisibility = () => {
     setIsPasswordVisible((prev) => !prev)
   }
 
-  const user =
-    role === "admin"
-      ? {
-          role: "admin",
-          loginAPI: "/admin/login",
-          profileRoute: "/admin/profile",
-          signupRoute: "/admin/signup",
-        }
-      : {
-          role: "user",
-          loginAPI: "/user/login",
-          profileRoute: "/user/profile",
-          signupRoute: "/signup",
-        };
+    // const user = {
+    //     role: "user",
+    //     loginAPI: "/user/login",
+    //     profileRoute: "/user/profile",
+    //     signupRoute: "/signup",
+    // };
 
-  const onSubmit = async (data) => {
-    console.log("Form Data:", data);
-    try {
-        const response = await axiosInstance.put(user.loginAPI, data);
-        console.log("response====", response);
-        // dispatch(saveUser(response?.data?.data));
-        // toast.success("Login success");
-        navigate(user.profileRoute);
-    } catch (error) {
-        // dispatch(clearUser());
-        // toast.error("Login Failed");
-        console.log(error);
-    }
-  };
+    // if (role == "admin") {
+    //     user.role = "admin";
+    //     user.loginAPI = "/admin/login";
+    //     (user.profileRoute = "/admin/profile"), (user.signupRoute = "/admin/signup");
+    // }
+    const user = {
+      role: role || "user", // Default to user
+      loginAPI: "/user/login", // Always use this endpoint
+      profileRoute: role === "admin" ? "/admin/profile" : "/user/profile",
+      signupRoute: role === "admin" ? "/admin/signup" : "/signup",
+    };
+
+    const onSubmit = async (data) => {
+        console.log(data);
+
+        try {
+          const response = await axiosInstance.put(user.loginAPI, data);
+          const userData = response.data.data; // Ensure backend sends `data`
+          
+          console.log("Login successful:", userData);
+          dispatch(saveUser(userData)); // Save user data in Redux
+
+            if (userData.role === "admin") {
+              navigate("/admin/profile"); // Redirect admin
+            } else {
+              navigate("/user/profile"); // Redirect normal user
+            }
+          } catch (error) {
+            dispatch(clearUser());
+            // toast.error("Login Failed");
+            console.log("Login failed:", error.response?.data?.message || error.message);
+        }
+    };
 
   return (
-    <div className={`flex flex-col gap-6 ${className}`} {...props}>
+    <div className="flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
+    <div className="w-full max-w-sm md:max-w-3xl">
+    <div className="flex flex-col gap-6">
       <Card className="overflow-hidden p-0 shadow-md dark:shadow-none">
         <CardContent className="grid p-0 md:grid-cols-2">
           <form className="p-6 md:p-8" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-6">
               <div className="flex flex-col items-center text-center">
-                <h1 className="text-2xl font-bold">Welcome back</h1>
+                <h1 className="text-2xl font-bold">Welcome back {user.role}</h1>
                 <p className="text-muted-foreground">Login to <span className="text-[#F8B319] font-['Luckiest_Guy']">Honey Popcorn</span></p>
               </div>
               <div className="grid gap-3">
@@ -218,6 +232,8 @@ export function LoginPageform({ role = "user", className, ...props }) {
         By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
         and <a href="#">Privacy Policy</a>.
       </div>
+    </div>
+    </div>
     </div>
   );
 }
