@@ -6,11 +6,8 @@ export const ProtectedRoutes = () => {
 
   // const [isUserAuth, setisUserAuth] = useState(false)
   const navigate = useNavigate()
-  const { user } = useSelector((state) => state.user);
-  const isUserAuth = user?._id;
-
-  // const { isUserAuth } = useSelector((state) => state.user)
-    
+  const { isUserAuth } = useSelector((state) => state.user)
+    // console.log(isUserAuth,"user auth");
   
   // useEffect(() => {
   //     if (!isUserAuth) {
@@ -18,12 +15,12 @@ export const ProtectedRoutes = () => {
   //       }
   //   }, [])
 
-  useEffect(() => {
-    if (!isUserAuth) {
-      navigate('/login');
-    }
-  }, [isUserAuth, navigate]);
+    useEffect(() => {
+      if (!isUserAuth) {
+        navigate('/login')
+      }
+    }, [isUserAuth])
     
-  return <Outlet />;
+    return <Outlet />
 
 }
