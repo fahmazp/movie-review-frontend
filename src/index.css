@@ -119,6 +119,10 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 #logo-name {
   font-family: "Luckiest Guy", cursive;
 

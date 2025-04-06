@@ -42,7 +42,6 @@ export const LoginPageform = ({ role }) => {
     };
 
     const onSubmit = async (data) => {
-        console.log(data);
 
         try {
           const response = await axiosInstance.put(user.loginAPI, data);

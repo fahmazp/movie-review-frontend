@@ -10,21 +10,25 @@ export const useFetch = (url) => {
 
    //  api call functn
    const fetchMovieData = async ()=> {
+      if (!url) return
        try {
         const response = await axiosInstance ({ method:"GET",url: url })  
-        console.log("response---", response,); 
+        // console.log("response---", response,); 
         setMovieData(response?.data?.data)
-        setIsLoading(false)
+        // setIsLoading(false)
         
        } catch (error) {   
-         console.log(error);
+        console.error("Fetch error:", error)
          setError(error)
+       }
+       finally {
+       setIsLoading(false)
        }
      }
 
          useEffect(() => {
            fetchMovieData()
-         },[])  
+         },[url])  
 
 
   return [movieData, isLoading, error]

@@ -6,13 +6,14 @@ export const ProtectedRoutes = () => {
 
   // const [isUserAuth, setisUserAuth] = useState(false)
   const { isUserAuth } = useSelector((state) => state.user)
-    const navigate = useNavigate()
-
-  useEffect(() => {
+  const navigate = useNavigate()
+    // console.log(isUserAuth,"user auth");
+  
+  // useEffect(() => {
       if (!isUserAuth) {
          navigate('/login')
         }
-    }, [])
+    // }, [])
 
   return (
     <Outlet />
