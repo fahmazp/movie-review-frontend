@@ -5,23 +5,25 @@ import { Outlet, useNavigate } from "react-router-dom"
 export const ProtectedRoutes = () => {
 
   // const [isUserAuth, setisUserAuth] = useState(false)
-  const { isUserAuth } = useSelector((state) => state.user)
   const navigate = useNavigate()
-    // console.log(isUserAuth,"user auth");
-  
-  useEffect(() => {
-      if (!isUserAuth) {
-         navigate('/login')
-        }
-    }, [])
+  const { user } = useSelector((state) => state.user);
+  const isUserAuth = user?._id;
 
-    // useEffect(() => {
-    //   if (!isUserAuth) {
-    //     navigate('/login')
-    //   }
-    // }, [isUserAuth])
+  // const { isUserAuth } = useSelector((state) => state.user)
     
-  return (
-    <Outlet />
-  )
+  
+  // useEffect(() => {
+  //     if (!isUserAuth) {
+  //        navigate('/login')
+  //       }
+  //   }, [])
+
+  useEffect(() => {
+    if (!isUserAuth) {
+      navigate('/login');
+    }
+  }, [isUserAuth, navigate]);
+    
+  return <Outlet />;
+
 }
