@@ -9,12 +9,18 @@ export const ProtectedRoutes = () => {
   const navigate = useNavigate()
     // console.log(isUserAuth,"user auth");
   
-  // useEffect(() => {
+  useEffect(() => {
       if (!isUserAuth) {
          navigate('/login')
         }
-    // }, [])
+    }, [])
 
+    // useEffect(() => {
+    //   if (!isUserAuth) {
+    //     navigate('/login')
+    //   }
+    // }, [isUserAuth])
+    
   return (
     <Outlet />
   )
