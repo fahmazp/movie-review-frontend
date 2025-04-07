@@ -9,12 +9,10 @@ import { clearUser, saveUser } from "@/redux/features/userSlice"
 
 export const RootLayout = () => {
   
-    // const [isUserAuth, setisUserAuth] = useState(false)
     const user = useSelector((state) => state.user)
     const [isLoading, setIsLoading] = useState(true)
 
     const dispatch = useDispatch()
-    // const location = useLocation()
 
     const checkUser = async () => {
         try {
@@ -25,7 +23,7 @@ export const RootLayout = () => {
             console.log("checkUser error:",error); 
             dispatch(clearUser())      
         } finally {
-            setIsLoading(false); // setting isLoading to false
+            setIsLoading(false)
           }
     }
 

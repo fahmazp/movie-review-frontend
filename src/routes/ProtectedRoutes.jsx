@@ -6,21 +6,16 @@ export const ProtectedRoutes = () => {
 
   // const [isUserAuth, setisUserAuth] = useState(false)
   const navigate = useNavigate()
-  const { isUserAuth } = useSelector((state) => state.user)
-    // console.log(isUserAuth,"user auth");
+  const { isUserAuth, isCheckingAuth } = useSelector((state) => state.user)
   
-  // useEffect(() => {
-  //     if (!isUserAuth) {
-  //        navigate('/login')
-  //       }
-  //   }, [])
-
-    // useEffect(() => {
-      if (!isUserAuth) {
+    useEffect(() => {
+      if (!isCheckingAuth && !isUserAuth) {
         navigate('/login')
       }
-    // }, [])
+    }, [isCheckingAuth, isUserAuth])
     
+    if (isCheckingAuth) return null //Don't render until check is complete
+
     return <Outlet />
 
 }

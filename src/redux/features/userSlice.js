@@ -5,15 +5,18 @@ export const userSlice = createSlice({
   initialState: {
     userData: {},
     isUserAuth: false,
+    isCheckingAuth: true,
   },
   reducers: {
     saveUser: (state, action) => {
         state.isUserAuth = true
         state.userData = action.payload
+        state.isCheckingAuth = false
     },
     clearUser: (state) => {
         state.isUserAuth = false
         state.userData = {}
+        state.isCheckingAuth = false
     },
   },
 })
