@@ -32,7 +32,8 @@ export const RootLayout = () => {
         checkUser()
     },[location?.pathname])
 
-    return isLoading ? null : (
+    // return isLoading ? null : (
+        return (
     <>
         {user.isUserAuth ? <Header /> : <Baseheader />}       
         <div className="min-h-72">

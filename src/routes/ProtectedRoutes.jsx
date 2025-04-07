@@ -15,11 +15,11 @@ export const ProtectedRoutes = () => {
   //       }
   //   }, [])
 
-    useEffect(() => {
+    // useEffect(() => {
       if (!isUserAuth) {
         navigate('/login')
       }
-    }, [isUserAuth])
+    // }, [])
     
     return <Outlet />
 
