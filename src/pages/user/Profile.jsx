@@ -1,9 +1,15 @@
+import { useSelector } from "react-redux";
 import { useFetch } from "@/hooks/useFetch";
 import { SquareUser, Calendar, ChevronRight, Smartphone} from 'lucide-react';
 import { SkeletonUser } from "@/components/user/UserSkelton";
 import { UserReviews } from "@/components/user/UserReviews";
 
 export const Profile = () => {
+
+  const { isUserAuth, isCheckingAuth } = useSelector((state) => state.user);
+  if (isCheckingAuth) return null
+
+  if (!isUserAuth) return null
 
 const [userDetails, isLoading, error] = useFetch("/user/profile")
 

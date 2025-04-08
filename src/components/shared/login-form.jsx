@@ -10,7 +10,7 @@ import { axiosInstance } from "@/config/axiosInstance";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { clearUser, saveUser } from "../../redux/features/userSlice";
-// import toast from "react-hot-toast";
+import toast from "react-hot-toast";
 
 export const LoginPageform = ({ role }) => {
     const { register, handleSubmit } = useForm();
@@ -49,7 +49,7 @@ export const LoginPageform = ({ role }) => {
           
           console.log("Login successful:", userData);
           dispatch(saveUser(userData)); // Save user data in Redux
-
+          toast.success("Login success. Profile loaded!");
             if (userData.role === "admin") {
               navigate("/admin/profile"); // Redirect admin
             } else {
@@ -57,7 +57,7 @@ export const LoginPageform = ({ role }) => {
             }
           } catch (error) {
             dispatch(clearUser());
-            // toast.error("Login Failed");
+            toast.error(error.response?.data?.message, "Login Failed");
             console.log("Login failed:", error.response?.data?.message || error.message);
         }
     };
@@ -98,7 +98,7 @@ export const LoginPageform = ({ role }) => {
                   id="password"
                   className="pr-10"
                   type={isPasswordVisible ? "text" : "password"}
-                  {...register("password", { required: true })}
+                  {...register("password" )}
                 />
                 <ToggleDemo isVisible={isPasswordVisible} toggleVisibility={togglePasswordVisibility} />
 

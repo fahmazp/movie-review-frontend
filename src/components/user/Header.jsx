@@ -1,12 +1,15 @@
 import React from 'react';
+import { Link, useLocation, useNavigate  } from 'react-router-dom';
+import { useFetch } from '@/hooks/useFetch';
+import { useDispatch } from 'react-redux';
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { AlignLeft, CircleX } from 'lucide-react';
 import { ModeToggle } from "../shared/mode-toggle";
+import { axiosInstance } from '@/config/axiosInstance';
+import { clearUser } from '@/redux/features/userSlice';
 import logo from "../../assets/images/image 1.png";
 import NavSearch from './Navbar-search';
-import { Link, useLocation  } from 'react-router-dom';
-import { useFetch } from '@/hooks/useFetch';
-// import { useSelector } from 'react-redux';
+import { AlignLeft, CircleX } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 const navigation = [
   { name: "Home", path: "/" },
@@ -21,8 +24,21 @@ function classNames(...classes) {
 export default function Navbar() {
 
   const location = useLocation(); // Get current route
-  // const user = useSelector((state) => state.user); // Get user data from Redux
   const [userDetails, error] = useFetch("/user/profile")
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await axiosInstance.get("/user/logout", { withCredentials: true });
+      dispatch(clearUser());
+      toast.success("You've been logged out");
+      navigate("/login");
+    } catch (err) {
+      console.error("Logout failed:", err);
+      toast.error("Logout failed, please try again.");
+    }
+  };
 
   return (
     <Disclosure as="nav" className="bg-[#000000]">
@@ -111,13 +127,13 @@ export default function Navbar() {
                   </a>
                 </MenuItem>
                 <MenuItem>
-                  <Link
-                  to="/user/logout"
-                    className="block px-4 py-2 text-sm text-gray-700 
-                    data-focus:bg-gray-100 data-focus:outline-hidden"
-                  >
-                    Sign out
-                  </Link>
+                   <button
+                     onClick={handleLogout}
+                     className="w-full text-left block px-4 py-2 text-sm text-gray-700 
+                       data-focus:bg-gray-100 data-focus:outline-hidden"
+                   >
+                     Log out
+                   </button>
                 </MenuItem>
               </MenuItems>
             </Menu>
