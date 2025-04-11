@@ -1,8 +1,9 @@
 import { useSelector } from "react-redux";
 import { useFetch } from "@/hooks/useFetch";
-import { SquareUser, Calendar, ChevronRight, Smartphone} from 'lucide-react';
+import { SquareUser, Calendar, Smartphone } from 'lucide-react';
 import { SkeletonUser } from "@/components/user/UserSkelton";
 import { UserReviews } from "@/components/user/UserReviews";
+import { Link } from "react-router-dom";
 
 export const Profile = () => {
 
@@ -78,12 +79,10 @@ const formatJoinDate = (dateString) => {
           </div>
         </dl>
         <div className="mt-6 border-t border-gray-900/5 px-6 py-6">
-          <a href="#" className="text-sm/6 font-bold text-gray-900 dark:text-gray-400">
+          <Link to="/user/edit-profile" className="text-base font-bold text-gray-900 dark:text-gray-400 underline underline-offset-2 hover:text-amber-600 dark:hover:text-amber-500">
             Edit Profile 
-            {/* <span aria-hidden="true">
-            </span> */}
-            <ChevronRight className="inline-block ml-0.5" size={20} strokeWidth={1.5} />
-          </a>
+            {/* <ArrowRight className="inline-block ml-0.5" size={20} strokeWidth={2} /> */}
+          </Link>
         </div>
       </div>
     </div>

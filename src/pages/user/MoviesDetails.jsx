@@ -114,7 +114,20 @@ export const MoviesDetails = () => {
       <p className="mb-6 text-gray-700 dark:text-gray-300 first-letter:uppercase">
         {movieDetails.description}
       </p>
-      
+
+        <div className="mt-3">
+          {movieDetails?.directedBy && (
+            <p className="text-base text-[#2a2c32] font-semibold dark:text-gray-300 mt-1">
+              <span className="font-semibold text-[#f8b319]">Director :</span> {movieDetails.directedBy}
+            </p>
+          )}
+          {movieDetails?.cast && Array.isArray(movieDetails.cast) && (
+            <p className="text-base text-[#2a2c32] font-semibold dark:text-gray-300">
+              <span className="font-semibold text-[#f8b319]">Cast :</span> {movieDetails.cast.join(", ")}
+            </p>
+          )}
+        </div>
+
       <div className="flex gap-4">
       <RippleButton textColor="dark:text-white"> <Plus size={20} strokeWidth={2.25} className="inline-block mr-1" />Watchlist</RippleButton>
       <RippleButton bgColor="border-[#F8B319] hover:bg-yellow-600" textColor="text-[#F8B319] hover:text-white" > Watch Trailer</RippleButton>

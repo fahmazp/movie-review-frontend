@@ -7,8 +7,12 @@ import { ProtectedRoutes } from "./ProtectedRoutes";
 import { ErrorPage } from "@/pages/shared/Error-page";
 import { Movies } from "@/pages/user/Movies";
 import { MoviesDetails } from "@/pages/user/MoviesDetails";
-import { AdminLayout } from "@/layout/AdminLayout";
 import { LoginPageform } from "@/components/shared/login-form";
+import { SignupPageform } from "@/pages/shared/SignupPageform";
+import { AdminLayout } from "@/layout/AdminLayout";
+import { AdminProfile } from "@/pages/admin/AdminProfile";
+import { AdminProtectedRoutes } from "./AdminProtectedRoutes";
+import { EditProfile } from "@/pages/user/EditProfile";
 
 
 export const router = createBrowserRouter([
@@ -33,7 +37,7 @@ export const router = createBrowserRouter([
         },
         {
           path: "signup",
-          element: <h1>Sign up</h1>
+          element: <SignupPageform />
         },
         {
           path: "movies",
@@ -50,6 +54,10 @@ export const router = createBrowserRouter([
             {
               path: "profile",
               element: <Profile/>
+            },
+            {
+              path: "edit-profile",
+              element: <EditProfile />
             },
             {
               path: "watchlist",
@@ -73,6 +81,20 @@ export const router = createBrowserRouter([
       {
         path: "login",
         element: <LoginPageform role="admin"/>
+      },
+      // {
+      //   path: "dashboard",
+      //   element: <AdminProfile />
+      // }
+      {
+        element: <AdminProtectedRoutes />,
+        children: [
+          {
+            path: "profile",
+            element: <AdminProfile />,
+          },
+          // more admin routes here
+        ],
       },
       
     ]

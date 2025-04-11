@@ -1,14 +1,13 @@
-import React from "react";
 import { useForm } from "react-hook-form";
+import { axiosInstance } from "@/config/axiosInstance";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ToggleDemo } from "./pswdToggle";
 import { useState } from "react";
-import { axiosInstance } from "@/config/axiosInstance";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { clearUser, saveUser } from "../../redux/features/userSlice";
 import toast from "react-hot-toast";
 
@@ -22,30 +21,24 @@ export const LoginPageform = ({ role }) => {
     setIsPasswordVisible((prev) => !prev)
   }
 
+  const user = {
+    role: role || "user", // Default role
+    loginAPI: "/user/login", // Use same login endpoint
+    profileRoute: "/user/profile", // Default user route
+    signupRoute: "/signup",
+  }
     // const user = {
-    //     role: "user",
-    //     loginAPI: "/user/login",
-    //     profileRoute: "/user/profile",
-    //     signupRoute: "/signup",
+    //   role: role || "user", // Default to user
+    //   loginAPI: "/user/login", // Always use this endpoint
+    //   profileRoute: role === "admin" ? "/admin/profile" : "/user/profile",
+    //   signupRoute: role === "admin" ? "/admin/signup" : "/signup",
     // };
-
-    // if (role == "admin") {
-    //     user.role = "admin";
-    //     user.loginAPI = "/admin/login";
-    //     (user.profileRoute = "/admin/profile"), (user.signupRoute = "/admin/signup");
-    // }
-    const user = {
-      role: role || "user", // Default to user
-      loginAPI: "/user/login", // Always use this endpoint
-      profileRoute: role === "admin" ? "/admin/profile" : "/user/profile",
-      signupRoute: role === "admin" ? "/admin/signup" : "/signup",
-    };
 
     const onSubmit = async (data) => {
 
         try {
           const response = await axiosInstance.put(user.loginAPI, data);
-          const userData = response.data.data; // Ensure backend sends `data`
+          const userData = response.data.data; // Ensure backend sends data
           
           console.log("Login successful:", userData);
           dispatch(saveUser(userData)); // Save user data in Redux
@@ -209,12 +202,9 @@ export const LoginPageform = ({ role }) => {
               </div>
               <div className="text-center text-sm">
                 Don&apos;t have an account?{" "}
-                <a
-                  href={user.signupRoute}
-                  className="underline underline-offset-4"
-                >
-                  Sign up
-                </a>
+                <Link to={user.signupRoute} className="underline underline-offset-4">
+                Sign up
+                </Link>
               </div>
             </div>
           </form>

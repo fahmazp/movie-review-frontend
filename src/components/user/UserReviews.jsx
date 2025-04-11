@@ -19,7 +19,7 @@ export const UserReviews = () => {
 
   if (reviewError) {
     console.error("Error fetching reviews:", reviewError);
-    return <div>Something went wrong fetching reviews...</div>;
+    return <div className="text-center">Something went wrong fetching reviews or no reviews found...</div>;
   }
 
   return (
