@@ -28,7 +28,7 @@ import React from "react"
             <span className="text-[13px] pt-1 font-bold text-gray-900 dark:text-[#f9f9f9] first-letter:uppercase">{movies?.genre}</span>
           </div>
           <div className="flex items-center justify-between">
-          <span className="text-[13px] text-[#f9f9f96a] pt-1">{movies?.formattedReleaseDate}</span>
+          <span className="text-[13px] text-stone-700 dark:text-[#f5c518] pt-1">{movies?.formattedReleaseDate}</span>
           </div>
         </div>
       </div>

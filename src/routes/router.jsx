@@ -39,14 +39,23 @@ export const router = createBrowserRouter([
           path: "signup",
           element: <SignupPageform />
         },
+        // {
+        //   path: "movies/:type",
+        //   element: <Movies/>
+        // },
         {
           path: "movies",
-          element: <Movies/>
+          element: <Movies type="film" />
+        },
+        {
+          path: "tv-shows",
+          element: <Movies type="tv_show" />
         },
         {
           path: "moviesDetails/:id",
           element: <MoviesDetails/>
         },
+        
         {
           path: "user",
           element: <ProtectedRoutes/>,

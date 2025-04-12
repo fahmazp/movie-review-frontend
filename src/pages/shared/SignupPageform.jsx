@@ -44,7 +44,7 @@ export const SignupPageform = () => {
       <div className="h-full">
 
 
-      <div className="flex min-h-full flex-1 flex-col justify-center py-8 sm:px-6 lg:px-8">
+      <div className="flex min-h-full flex-1 flex-col justify-center px-3 py-8 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <img
             alt="Logo"
@@ -56,8 +56,8 @@ export const SignupPageform = () => {
           </h2>
         </div>
 
-        <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-[480px] shadow-md dark:shadow-none rounded-2xl">
-          <div className="bg-[#EDEEF0] dark:bg-[#DCDDDA] px-6 py-6 sm:rounded-2xl">
+        <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-[400px] shadow-md dark:shadow-none rounded sm:rounded-2xl">
+          <div className="bg-[#EDEEF0] dark:bg-[#DCDDDA] px-6 py-6 rounded sm:rounded-2xl">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
 
             <div>

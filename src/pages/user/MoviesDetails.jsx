@@ -3,7 +3,7 @@ import { useFetch } from "@/hooks/useFetch"
 import { Link, useParams } from "react-router-dom"
 import { BreadcrumbsLink } from "@/components/user/Breadcrumbs"
 import RippleButton from "@/components/user/ripple-btn"
-import { Plus } from 'lucide-react';
+import { Dot, DotIcon, Plus } from 'lucide-react';
 
 export const MoviesDetails = () => {
 
@@ -31,6 +31,18 @@ export const MoviesDetails = () => {
       <h1 className="text-xl font-semibold text-gray-900 sm:text-3xl dark:text-white">
     {movieDetails.title}
       </h1>
+
+    <div className="flex mt-1.5">
+      <span className="inline-flex items-center rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset">
+      {movieDetails.duration}
+      </span>
+      {/* <Dot /> */}
+      <Dot size={20} strokeWidth={2.75} />
+      <span className="inline-flex items-center rounded-full bg-yellow-50 px-2 py-0.5 text-xs font-medium text-yellow-700 ring-1 ring-yellow-600/50 ring-inset">
+      {movieDetails.formattedReleaseDate}
+      </span>
+    </div>
+
       <div className="my-2">
         <p className="text-xl font-extrabold text-gray-900 dark:text-white">{movieDetails.genre}</p>
 
