@@ -3,7 +3,8 @@ import { useFetch } from "@/hooks/useFetch"
 import { Link, useParams } from "react-router-dom"
 import { BreadcrumbsLink } from "@/components/user/Breadcrumbs"
 import RippleButton from "@/components/user/ripple-btn"
-import { Dot, DotIcon, Plus } from 'lucide-react';
+import { Dot, Plus } from 'lucide-react';
+import { MovieReviews } from "@/components/user/MovieReviews"
 
 export const MoviesDetails = () => {
 
@@ -19,7 +20,6 @@ export const MoviesDetails = () => {
 <section className="py-8 md:py-16 antialiased">
 <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
   <div className="lg:grid lg:grid-cols-2 lg:gap-8">
-
     
     <div className="shrink-0 max-w-md lg:max-w-lg mx-auto">
       <div className="w-96 h-96 overflow-hidden rounded-2xl">
@@ -122,12 +122,14 @@ export const MoviesDetails = () => {
         </div>
       </div>
 
-      <h3 className="underline underline-offset-4 mb-1">Description :</h3>
+      <div className="">
+      {/* <h3 className="underline underline-offset-4 mb-1">Description :</h3> */}
       <p className="mb-6 text-gray-700 dark:text-gray-300 first-letter:uppercase">
         {movieDetails.description}
       </p>
+      </div>
 
-        <div className="mt-3">
+        <div className="my-3">
           {movieDetails?.directedBy && (
             <p className="text-base text-[#2a2c32] font-semibold dark:text-gray-300 mt-1">
               <span className="font-semibold text-[#f8b319]">Director :</span> {movieDetails.directedBy}
@@ -148,6 +150,10 @@ export const MoviesDetails = () => {
     </div>
 
   </div>
+
+  {/*reviews carousel  */}
+  <MovieReviews movieId={params.id} />
+
 </div>
 </section>
 

@@ -37,10 +37,10 @@ export default function Navbar() {
 
           <div className="flex flex-1 items-center justify-center sm:items-center sm:justify-start">
           <div className="flex shrink-0 items-center" id="logo-name">
-              <img alt="logo" src={logo} className="h-12 w-auto object-cover" />
+              <img alt="logo" src={logo} className="sm:h-12 h-8 w-auto object-cover" />
               <div className="flex flex-col leading-tight">
-                <span className="font-bold text-[15px] tracking-wider text-[#F8B319]">Honey</span>
-                <span className="font-bold text-[15px] tracking-wider text-[#F8B319]">Popcorn</span>
+                <span className="font-bold text-xs sm:text-[15px] tracking-wider text-[#F8B319]">Honey</span>
+                <span className="font-bold text-xs sm:text-[15px] tracking-wider text-[#F8B319]">Popcorn</span>
               </div>
             </div>
 

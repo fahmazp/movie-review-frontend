@@ -3,7 +3,6 @@ import { Moviescard } from "@/components/user/MoviesCard"
 import { MoviecardSkeltons } from "@/components/user/Skeltons"
 import { BreadcrumbsLink } from "@/components/user/Breadcrumbs"
 import { useFetch } from "@/hooks/useFetch"
-import { useParams } from "react-router-dom"
 
 export const Movies = ({ type }) => {
   // const { type } = useParams()
