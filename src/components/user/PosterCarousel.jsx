@@ -6,8 +6,8 @@ import { useState } from "react"
 // import poster3 from "@/assets/posters/inception.jpg"
 
 const movies = [
-    { title: "DeadPool 3", poster: "deadpool-and-wolverine.jpg" },
     { title: "Rick and Morty", poster: "rick-and-morty.jpg" },
+    { title: "DeadPool 3", poster: "deadpool-and-wolverine.jpg" },
     { title: "Avatar", poster: "avatar.jpg" },
 ]
 
@@ -37,7 +37,7 @@ export const PosterCarousel = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent z-10 rounded-xl" />
 
             {/* Movie title */}
-            <h2 className="absolute top-4 left-4 z-20 text-white text-3xl font-semibold">{movie.title}</h2>
+            <h2 className="absolute top-6 left-6 z-20 text-white text-3xl font-semibold text-shadow">{movie.title}</h2>
 
             {/* Buttons */}
             <div className="absolute bottom-6 left-4 z-20 flex space-x-4">
