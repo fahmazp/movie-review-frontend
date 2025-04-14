@@ -32,12 +32,12 @@ export const MovieReviews = ({ movieId }) => {
       };
 
   return (
-    <div className="mt-14 px-4 mx-auto 2xl:px-0">
+    <div className="mt-12 px-4 mx-auto 2xl:px-0">
       <h2 className="text-2xl text-center font-bold mb-4">Featured Reviews</h2>
       <Carousel className="w-full max-w-4xl mx-auto px-2 sm:px-4">
         <CarouselContent className="-ml-1">
           {reviews.map((review, index) => (
-            <CarouselItem key={review._id || index} className="pl-1 md:basis-1/2 lg:basis-1/3">
+            <CarouselItem key={review._id || index} className="pl-1 md:basis-1/2 lg:basis-1/3 cursor-grab active:cursor-grabbing">
               <div className="p-2">
                 <Card className="h-full">
                   <CardContent className="p-4 flex flex-col gap-2">
@@ -49,7 +49,7 @@ export const MovieReviews = ({ movieId }) => {
                     </p>
                     </div>  
 
-                    <p className="text-sm text-gray-600 dark:text-gray-300 italic line-clamp-3">
+                    <p className="text-sm text-gray-700 dark:text-gray-300 italic line-clamp-3">
                       "{review?.comment}"
                     </p>
                     <p className="text-sm text-[#f8b319] mt-auto">
@@ -85,7 +85,7 @@ export const MovieReviews = ({ movieId }) => {
             {selectedReview?.comment}
           </div>
 
-          <div className="text-xs text-gray-400 mt-1.5">
+          <div className="text-xs font-semibold text-gray-600 dark:text-gray-500 mt-1.5">
           {new Date(selectedReview?.createdAt).toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",

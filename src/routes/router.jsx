@@ -39,10 +39,6 @@ export const router = createBrowserRouter([
           path: "signup",
           element: <SignupPageform />
         },
-        // {
-        //   path: "movies/:type",
-        //   element: <Movies/>
-        // },
         {
           path: "movies",
           element: <Movies type="film" />

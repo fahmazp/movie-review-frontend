@@ -80,6 +80,7 @@ export default function Footer() {
           ))}
         </div>
         <p className="mt-10 text-center text-sm/6 text-gray-500">&copy; 2025 HoneyPopcorn, Inc. All rights reserved.</p>
+        <p className="text-center text-xs text-[#f8b319]">Crafted By Fahmaz Ashraf</p>
       </div>
 
       <div aria-hidden="true" className="absolute top-0 left-1/2 -z-10 -translate-x-1/2 blur-3xl xl:-top-6">
