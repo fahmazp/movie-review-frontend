@@ -33,6 +33,7 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
 
   const handleLogout = async () => {
     try {
@@ -74,17 +75,24 @@ export default function Navbar() {
                 <span className="font-bold text-xs sm:text-[15px] tracking-wider text-[#F8B319]">Popcorn</span>
               </div>
             </div>
-
-            <div className="relative sm:hidden">
-              <input
-                type="text"
-                className="w-24 rounded-md bg-zinc-800 pl-8 pr-2 py-1 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#F8B319]"
-              />
-              <div className="absolute left-2 top-1/2 -translate-y-1/2 text-gray-400">
-              <Search size={16}/>
-              </div>
-            </div>
         
+            {/* Search icon for mobile */}
+            {isSearchOpen && (
+              <div className="absolute inset-0 bg-[#000000] flex items-center px-4 sm:hidden z-99">
+                <Search size={18} className="text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className="ml-2 flex-1 bg-transparent text-white placeholder-gray-400 focus:outline-none text-sm"
+                />
+                <button
+                  onClick={() => setIsSearchOpen(false)}
+                  className="ml-2 text-gray-400 hover:text-white"
+                >
+                  <CircleX size={22} />
+                </button>
+              </div>
+            )}
 
             {/* Sidebar Toggle */}
             <div className="hidden sm:flex items-center">
@@ -126,6 +134,16 @@ export default function Navbar() {
 
 
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+
+            {/* Mobile Search Icon */}
+            {!isSearchOpen && (
+              <button
+                onClick={() => setIsSearchOpen(true)}
+                className="p-2 text-gray-400 hover:text-white sm:hidden"
+              >
+                <Search size={20} />
+              </button>
+            )}
 
             <div className="hidden md:block">
             <ModeToggle />    

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React,{ useState } from 'react';
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
 import { AlignLeft, CircleX, Search, SquareChartGantt } from 'lucide-react';
 import { ModeToggle } from "../shared/mode-toggle";
@@ -25,10 +25,20 @@ export default function Navbar() {
 
   const location = useLocation(); // Get current route
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  // const searchInputRef = useRef(null); // ref for input
+
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
   
+  // Auto-focus input when search is opened
+  // useEffect(() => {
+  //   if (isSearchOpen && searchInputRef.current) {
+  //     searchInputRef.current.focus();
+  //   }
+  // }, [isSearchOpen]);
+
   return (
     <>
     <Disclosure as="nav" className="bg-[#000000]">
@@ -54,7 +64,7 @@ export default function Navbar() {
               </div>
             </div>
 
-            <div className="relative sm:hidden">
+            {/* <div className="relative sm:hidden">
               <input
                 type="text"
                 className="w-24 rounded-md bg-zinc-800 pl-8 pr-2 py-1 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#F8B319]"
@@ -62,7 +72,25 @@ export default function Navbar() {
               <div className="absolute left-2 top-1/2 -translate-y-1/2 text-gray-400">
               <Search size={16}/>
               </div>
-            </div>
+            </div> */}
+
+{/* Search icon for mobile */}
+{isSearchOpen && (
+  <div className="absolute inset-0 bg-[#000000] flex items-center px-4 sm:hidden z-99">
+    <Search size={18} className="text-gray-400" />
+    <input
+      type="text"
+      placeholder="Search..."
+      className="ml-2 flex-1 bg-transparent text-white placeholder-gray-400 focus:outline-none text-sm"
+    />
+    <button
+      onClick={() => setIsSearchOpen(false)}
+      className="ml-2 text-gray-400 hover:text-white"
+    >
+      <CircleX size={22} />
+    </button>
+  </div>
+)}
 
             {/* Sidebar Toggle */}
             <div className="hidden sm:flex items-center">
@@ -90,11 +118,18 @@ export default function Navbar() {
 
 
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:gap-3 sm:ml-6 sm:pr-0">
-
+            {/* Mobile Search Icon */}
+            {!isSearchOpen && (
+              <button
+                onClick={() => setIsSearchOpen(true)}
+                className="p-2 text-gray-400 hover:text-white sm:hidden"
+              >
+                <Search size={20} />
+              </button>
+            )}
             <div className="hidden md:block">
             <ModeToggle />    
             </div>
-
 
             <Link to="/login">
                 <RippleButton bgColor="border-[#F8B319]">
@@ -105,6 +140,25 @@ export default function Navbar() {
           
         </div>
       </div>
+
+{/* Mobile Search Full Width Overlay */}
+{/* {isSearchOpen && (
+        <div className="absolute inset-0 bg-[#000000] flex items-center px-4 sm:hidden z-20">
+          <Search size={18} className="text-gray-400" />
+          <input
+            ref={searchInputRef}
+            type="text"
+            placeholder="Search..."
+            className="ml-2 flex-1 bg-transparent text-white placeholder-gray-400 focus:outline-none text-sm"
+          />
+          <button
+            onClick={() => setIsSearchOpen(false)}
+            className="ml-2 text-gray-400 hover:text-white"
+          >
+            <CircleX size={22} />
+          </button>
+        </div>
+      )} */}
 
       <DisclosurePanel className="sm:hidden">
         <div className="space-y-1 px-2 pt-2 pb-3">
@@ -122,6 +176,11 @@ export default function Navbar() {
               {item.name}
             </DisclosureButton>
           ))}
+
+    <div className="mt-2 px-3">
+      <ModeToggle />
+    </div>
+
         </div>
       </DisclosurePanel>
     </Disclosure>
