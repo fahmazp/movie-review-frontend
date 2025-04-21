@@ -79,15 +79,15 @@ export default function Navbar() {
             {/* Search icon for mobile */}
             {isSearchOpen && (
               <div className="absolute inset-0 bg-[#000000] flex items-center px-4 sm:hidden z-99">
-                <Search size={18} className="text-gray-400" />
+                <Search size={18} className="text-yellow-200" />
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="ml-2 flex-1 bg-transparent text-white placeholder-gray-400 focus:outline-none text-sm"
+                  className="ml-2 flex-1 bg-transparent text-white placeholder-yellow-200 focus:outline-none text-sm"
                 />
                 <button
                   onClick={() => setIsSearchOpen(false)}
-                  className="ml-2 text-gray-400 hover:text-white"
+                  className="ml-2 text-yellow-300"
                 >
                   <CircleX size={22} />
                 </button>
@@ -139,9 +139,9 @@ export default function Navbar() {
             {!isSearchOpen && (
               <button
                 onClick={() => setIsSearchOpen(true)}
-                className="p-2 text-gray-400 hover:text-white sm:hidden"
+                className="px-3 text-gray-200 hover:text-yellow-400 sm:hidden"
               >
-                <Search size={20} />
+                <Search size={22} />
               </button>
             )}
 
