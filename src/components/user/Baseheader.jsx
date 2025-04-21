@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
-import { AlignLeft, CircleX, SquareChartGantt } from 'lucide-react';
+import { AlignLeft, CircleX, Search, SquareChartGantt } from 'lucide-react';
 import { ModeToggle } from "../shared/mode-toggle";
 import logo from "../../assets/images/image 1.png";
 import NavSearch from './Navbar-search';
@@ -33,31 +33,41 @@ export default function Navbar() {
     <>
     <Disclosure as="nav" className="bg-[#000000]">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div className="relative flex h-16 items-center justify-between">
+        <div className="relative flex h-16 items-center">
           
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
             {/* Mobile menu button*/}
-            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-200 hover:bg-transparent hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset cursor-pointer">
+            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-1 text-gray-200 hover:bg-transparent hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset cursor-pointer">
               <span className="absolute -inset-0.5" />
               <span className="sr-only">Open main menu</span>
-              <AlignLeft aria-hidden="true" className="block size-6 group-data-open:hidden" />
-              <CircleX aria-hidden="true" className="hidden size-6 group-data-open:block" />
+              <AlignLeft aria-hidden="true" className="block size-5 group-data-open:hidden" />
+              <CircleX aria-hidden="true" className="hidden size-5 group-data-open:block" />
             </DisclosureButton>
           </div>
 
-          <div className="flex flex-1 items-center justify-center sm:items-center sm:justify-start sm:gap-5">
+          <div className="flex flex-1 items-center justify-center gap-2 sm:justify-start sm:gap-1 md:gap-4">
           <div className="flex shrink-0 items-center" id="logo-name">
-              <img alt="logo" src={logo} className="sm:h-12 h-8 w-auto object-cover" />
+              <img alt="logo" src={logo} className="sm:h-12 h-7 w-auto object-cover" />
               <div className="flex flex-col leading-tight">
                 <span className="font-bold text-xs sm:text-[15px] tracking-wider text-[#F8B319]">Honey</span>
                 <span className="font-bold text-xs sm:text-[15px] tracking-wider text-[#F8B319]">Popcorn</span>
               </div>
             </div>
 
+            <div className="relative sm:hidden">
+              <input
+                type="text"
+                className="w-24 rounded-md bg-zinc-800 pl-8 pr-2 py-1 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#F8B319]"
+              />
+              <div className="absolute left-2 top-1/2 -translate-y-1/2 text-gray-400">
+              <Search size={16}/>
+              </div>
+            </div>
+
             {/* Sidebar Toggle */}
-            <div className="flex items-center">
+            <div className="hidden sm:flex items-center">
               <button
-                className="inline-flex items-center justify-center rounded-2xl px-1.5 py-1 text-gray-200 hover:bg-[#121212] focus:outline-none"
+                className="inline-flex items-center justify-center rounded-2xl px-4 py-1 text-gray-200 hover:bg-[#1a1a1a] focus:outline-none"
                 onClick={toggleSidebar}
               >
                 {isSidebarOpen ? (
@@ -80,7 +90,12 @@ export default function Navbar() {
 
 
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:gap-3 sm:ml-6 sm:pr-0">
+
+            <div className="hidden md:block">
             <ModeToggle />    
+            </div>
+
+
             <Link to="/login">
                 <RippleButton bgColor="border-[#F8B319]">
                   <span className='text-sm'>Sign In</span>

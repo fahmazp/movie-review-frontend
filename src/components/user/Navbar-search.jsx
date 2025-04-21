@@ -2,7 +2,7 @@ import { Funnel } from "lucide-react";
 
 export default function NavSearch() {
   return (
-    <div className="mt-1 ml-8 w-72">
+    <div className="mt-1 ml-8 md:w-72">
       <div className="flex items-center rounded-sm bg-[#21242D] px-2 outline-1 -outline-offset-1 outline-gray-900 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-[#F8B319]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
