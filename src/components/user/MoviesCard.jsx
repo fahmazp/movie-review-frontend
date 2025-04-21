@@ -5,7 +5,7 @@ import React from "react"
 
 
     return (
-      <div className="relative w-72 max-w-sm bg-white border overflow-hidden border-gray-200 rounded-3xl drop-shadow-2xl dark:drop-shadow-none dark:bg-neutral-950 dark:border-neutral-900 mb-6">
+      <div className="relative w-full max-w-xs mx-auto bg-white border overflow-hidden border-gray-200 rounded-3xl drop-shadow-2xl dark:drop-shadow-none dark:bg-neutral-950 dark:border-neutral-900 mb-6">
 
         <span className="absolute top-0 right-0 bg-[#F8B319] text-zinc-900 text-xl font-extrabold px-4 py-1.5 rounded-tr-2xl rounded-bl-2xl shadow-md">
         4.1

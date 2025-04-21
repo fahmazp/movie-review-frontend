@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation, useNavigate  } from 'react-router-dom';
 import { useFetch } from '@/hooks/useFetch';
 import { useDispatch } from 'react-redux';
@@ -8,13 +8,17 @@ import { axiosInstance } from '@/config/axiosInstance';
 import { clearUser } from '@/redux/features/userSlice';
 import logo from "../../assets/images/image 1.png";
 import NavSearch from './Navbar-search';
-import { AlignLeft, CircleX } from 'lucide-react';
+import { AlignLeft, CircleX, SquareChartGantt } from 'lucide-react';
 import toast from 'react-hot-toast';
+import Sidebar from './Sidebar';
 
 const navigation = [
   { name: "Home", path: "/" },
   { name: "Movies", path: "/movies" },
   { name: "TV Shows", path: "/tv-shows" },
+  { name: "Watchlists", path: "/user/watchlists" },
+  { name: "News", path: "/news" },
+  { name: "Profile", path: "/user/profile"}
 ]
 
 function classNames(...classes) {
@@ -28,6 +32,8 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   const handleLogout = async () => {
     try {
       await axiosInstance.get("/user/logout", { withCredentials: true });
@@ -40,13 +46,33 @@ export default function Navbar() {
     }
   };
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
+    <>
     <Disclosure as="nav" className="bg-[#000000]">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
+
+            {/* Sidebar Toggle */}
+            {/* <div className="flex items-center">
+              <button
+                className="inline-flex items-center justify-center rounded-md p-2 text-gray-100 hover:text-white focus:outline-none"
+                onClick={toggleSidebar}
+              >
+                {isSidebarOpen ? (
+                  <CircleX className="size-6" />
+                ) : (
+                  <AlignJustify className="size-6 hidden sm:block" />
+                )}
+              </button>
+            </div> */}
+
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
             {/* Mobile menu button*/}
-            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-transparent hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset cursor-pointer">
+            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-200 hover:bg-transparent hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset cursor-pointer">
               <span className="absolute -inset-0.5" />
               <span className="sr-only">Open main menu</span>
               <AlignLeft aria-hidden="true" className="block size-6 group-data-open:hidden" />
@@ -54,7 +80,7 @@ export default function Navbar() {
             </DisclosureButton>
           </div>
 
-          <div className="flex flex-1 items-center justify-center sm:items-center sm:justify-start">
+          <div className="flex flex-1 items-center justify-center sm:items-center sm:justify-start sm:gap-5">
           <div className="flex shrink-0 items-center" id="logo-name">
               <img alt="logo" src={logo} className="sm:h-12 h-8 w-auto object-cover" />
               <div className="flex flex-col leading-tight">
@@ -63,8 +89,25 @@ export default function Navbar() {
               </div>
             </div>
 
-            <div className="hidden sm:flex sm:items-center sm:ml-8 gap-5">
-              <div className="flex space-x-4">
+            {/* Sidebar Toggle */}
+            <div className="flex items-center">
+              <button
+                className="inline-flex items-center justify-center rounded-2xl px-1.5 py-1 text-gray-200 hover:bg-[#121212] focus:outline-none"
+                onClick={toggleSidebar}
+              >
+                {isSidebarOpen ? (
+                  <CircleX className="size-6" />
+                ) : (
+                  <div className="flex items-center gap-2">
+                  <SquareChartGantt className="size-6 hidden sm:block" />
+                  <span className="text-sm font-semibold sm:block hidden">Menu</span>
+                  </div>
+                )}
+              </button>
+            </div>
+
+            <div className="hidden sm:flex sm:items-center">
+              {/* <div className="flex space-x-4">
                 {navigation.map((item) => (
                   <Link
                     key={item.name}
@@ -79,10 +122,8 @@ export default function Navbar() {
                     {item.name}
                   </Link>
                 ))}
-                </div>
-                <div>
+                </div> */}
                       <NavSearch />
-                </div>
             </div>
 
           </div>
@@ -160,5 +201,10 @@ export default function Navbar() {
         </div>
       </DisclosurePanel>
     </Disclosure>
+
+    {/* Sidebar Component */}
+    {isSidebarOpen && <Sidebar toggleSidebar={toggleSidebar} />}
+
+    </>
   )
 }

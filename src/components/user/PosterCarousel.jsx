@@ -1,9 +1,6 @@
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
-// import poster1 from "@/assets/posters/crown.jpg"
-// import poster2 from "@/assets/posters/interstellar.jpg"
-// import poster3 from "@/assets/posters/inception.jpg"
 
 const movies = [
     { title: "Rick and Morty", poster: "rick-and-morty.jpg" },

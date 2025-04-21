@@ -37,11 +37,26 @@ export const RootLayout = () => {
   
     return (
       <>
+<div
+  className="
+    fixed top-0 left-0 h-full w-full 
+    bg-no-repeat bg-cover bg-center 
+    opacity-8 dark:opacity-15 -z-10 
+    dark:bg-gradient-to-r dark:from-black dark:via-black/70 dark:to-transparent
+    bg-gradient-to-r from-white via-white/50 to-transparent
+  "
+  style={{
+    backgroundImage: "url('/images/Hexagon-bg.svg')",
+    backdropFilter: "blur(4px)"
+  }}
+/>
+
+
         {isUserAuth ? <Header /> : <Baseheader />}
-        <div className="min-h-72">
           <Outlet />
-        </div>
         <Footer />
+
+        
       </>
     );
   };
