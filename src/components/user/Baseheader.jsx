@@ -232,8 +232,8 @@ export default function Navbar() {
     </Disclosure>
 
     {/* Sidebar Component */}
-    {isSidebarOpen && <Sidebar toggleSidebar={toggleSidebar} />}
-
+    {/* {isSidebarOpen && <Sidebar toggleSidebar={toggleSidebar} />} */}
+    <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
     </>
   )
 }

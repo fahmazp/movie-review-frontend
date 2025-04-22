@@ -12,12 +12,20 @@ const navigation = [
     { name: "Profile", path: "/user/profile", icon: CircleUser },
   ]
 
-const Sidebar = ({ toggleSidebar }) => {
+    const Sidebar =  ({ isSidebarOpen, toggleSidebar }) => {
 
     const location = useLocation()
 
   return (
-    <div className="fixed top-0 left-0 z-50 h-full w-80 bg-gradient-to-b from-black via-gray-900 to-black text-white p-4 shadow-lg hidden sm:block">
+    // <div className="fixed top-0 left-0 z-50 h-full w-80 bg-gradient-to-b from-black via-gray-900 to-black text-white p-4 shadow-lg hidden sm:block">
+
+    <div className={`
+      fixed top-0 left-0 z-50 h-full w-80 bg-gradient-to-b from-black via-gray-900 to-black text-white p-4 shadow-lg hidden sm:block
+      transform transition-transform duration-300 ease-in-out
+      ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+    `}>
+
+
       <div className="flex justify-between items-center mb-8">
         <img alt="logo" src={logo} className="h-10 w-auto object-cover" />
         <button onClick={toggleSidebar}>

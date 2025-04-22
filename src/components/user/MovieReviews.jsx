@@ -18,9 +18,7 @@ export const MovieReviews = ({ movieId }) => {
 
   const [open, setOpen] = useState(false);
   const [selectedReview, setSelectedReview] = useState(null);
-  //Access the actual reviews array from the fetched object
 //   const reviews = data || [];
-    console.log(reviews);
     
     if (isLoading) return <p className="text-center">Loading reviews...</p>
     if (error) return <p className="text-red-500 text-center">Error loading reviews</p>
@@ -70,8 +68,10 @@ export const MovieReviews = ({ movieId }) => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+
+        <CarouselPrevious className="hidden sm:flex" />
+        <CarouselNext className="hidden sm:flex" />
+
       </Carousel>
 
       <Dialog open={open} onOpenChange={setOpen}>
@@ -99,5 +99,3 @@ export const MovieReviews = ({ movieId }) => {
     </div>
   )
 }
-
-// export default MovieReviews;
