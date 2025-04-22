@@ -1,12 +1,13 @@
-import React,{ useState } from 'react';
+import React,{ useEffect, useRef, useState } from 'react';
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
 import { AlignLeft, CircleX, Search, SquareChartGantt } from 'lucide-react';
 import { ModeToggle } from "../shared/mode-toggle";
 import logo from "../../assets/images/image 1.png";
-import NavSearch from './Navbar-search';
 import { Link, useLocation  } from 'react-router-dom';
 import RippleButton from './ripple-btn';
 import Sidebar from './Sidebar';
+import { NavSearch } from './Navbar-search';
+import { useMovieSearch } from '@/hooks/useMovieSearch';
 
 const navigation = [
   { name: "Home", path: "/" },
@@ -26,18 +27,19 @@ export default function Navbar() {
   const location = useLocation(); // Get current route
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
-  // const searchInputRef = useRef(null); // ref for input
+  const searchInputRef = useRef(null); // ref for input
+
+  const { searchText, handleSearchChange, filteredMovies } = useMovieSearch();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
   
-  // Auto-focus input when search is opened
-  // useEffect(() => {
-  //   if (isSearchOpen && searchInputRef.current) {
-  //     searchInputRef.current.focus();
-  //   }
-  // }, [isSearchOpen]);
+  useEffect(() => {
+    if (isSearchOpen && searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, [isSearchOpen]);
 
   return (
     <>
@@ -74,21 +76,44 @@ export default function Navbar() {
               </div>
             </div> */}
 
-{/* Search bar for mobile */}
-{isSearchOpen && (
-  <div className="absolute inset-0 bg-[#000000] flex items-center px-4 sm:hidden z-99">
-    <Search size={18} className="text-yellow-200" />
-    <input
-      type="text"
-      placeholder="Search..."
-      className="ml-2 flex-1 bg-transparent text-white placeholder-yellow-200 focus:outline-none text-sm"
-    />
-    <button
-      onClick={() => setIsSearchOpen(false)}
-      className="ml-2 text-yellow-300"
-    >
-      <CircleX size={22} />
-    </button>
+        {/* Search bar for mobile */}
+        {/* <div className="absolute inset-0 bg-[#000000] flex items-center px-4 sm:hidden z-99"> */}
+
+        {isSearchOpen && (
+  <div className="absolute inset-0 bg-[#000000] flex flex-col px-4 sm:hidden z-99">
+    <div className="flex items-center">
+      <Search size={18} className="text-yellow-200" />
+      <input
+        ref={searchInputRef}
+        type="text"
+        placeholder="Search..."
+        value={searchText}
+        onChange={handleSearchChange}
+        className="ml-2 flex-1 bg-transparent text-white placeholder-yellow-200 focus:outline-none text-sm"
+      />
+      <button onClick={() => setIsSearchOpen(false)} className="ml-2 text-yellow-300">
+        <CircleX size={22} />
+      </button>
+    </div>
+
+    {/* Dropdown Results */}
+    {searchText && (
+      <div className="bg-zinc-950 border border-gray-300 rounded-md mt-2 shadow-lg max-h-80">
+        {filteredMovies.length > 0 ? (
+          filteredMovies.map((movie) => (
+            <Link
+              to={`/moviesDetails/${movie._id}`}
+              key={movie._id}
+              className="block px-4 py-2 text-gray-200 hover:text-[#F8B319]"
+            >
+              {movie.title}
+            </Link>
+          ))
+        ) : (
+          <div className="px-4 py-2 text-gray-500">No movies found</div>
+        )}
+      </div>
+    )}
   </div>
 )}
 

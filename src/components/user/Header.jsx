@@ -7,10 +7,11 @@ import { ModeToggle } from "../shared/mode-toggle";
 import { axiosInstance } from '@/config/axiosInstance';
 import { clearUser } from '@/redux/features/userSlice';
 import logo from "../../assets/images/image 1.png";
-import NavSearch from './Navbar-search';
+// import NavSearch from './Navbar-search';
 import { AlignLeft, CircleX, Search, SquareChartGantt } from 'lucide-react';
 import toast from 'react-hot-toast';
 import Sidebar from './Sidebar';
+import { NavSearch } from './Navbar-search';
 
 const navigation = [
   { name: "Home", path: "/" },
