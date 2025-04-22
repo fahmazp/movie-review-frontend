@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate  } from 'react-router-dom';
 import { useFetch } from '@/hooks/useFetch';
 import { useDispatch } from 'react-redux';
@@ -7,11 +7,11 @@ import { ModeToggle } from "../shared/mode-toggle";
 import { axiosInstance } from '@/config/axiosInstance';
 import { clearUser } from '@/redux/features/userSlice';
 import logo from "../../assets/images/image 1.png";
-// import NavSearch from './Navbar-search';
 import { AlignLeft, CircleX, Search, SquareChartGantt } from 'lucide-react';
 import toast from 'react-hot-toast';
 import Sidebar from './Sidebar';
 import { NavSearch } from './Navbar-search';
+import { useMovieSearch } from '@/hooks/useMovieSearch';
 
 const navigation = [
   { name: "Home", path: "/" },
@@ -33,8 +33,11 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const searchInputRef = useRef(null)
+  const containerRef = useRef(null);
+  const { searchText, handleSearchChange, filteredMovies } = useMovieSearch()
 
   const handleLogout = async () => {
     try {
@@ -51,6 +54,34 @@ export default function Navbar() {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+
+  const closeSearch = () => {
+    setIsSearchOpen(false);
+    handleSearchChange({ target: { value: "" } }); // Clear input
+  };  
+
+  useEffect(() => {
+    if (isSearchOpen && searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, [isSearchOpen]);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
+        setIsSearchOpen(false);
+      }
+    }
+    if (isSearchOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+  
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isSearchOpen])
 
   return (
     <>
@@ -77,23 +108,46 @@ export default function Navbar() {
               </div>
             </div>
         
-            {/* Search icon for mobile */}
-            {isSearchOpen && (
-              <div className="absolute inset-0 bg-[#000000] flex items-center px-4 sm:hidden z-99">
-                <Search size={18} className="text-yellow-200" />
-                <input
-                  type="text"
-                  placeholder="Search..."
-                  className="ml-2 flex-1 bg-transparent text-white placeholder-yellow-200 focus:outline-none text-sm"
-                />
-                <button
-                  onClick={() => setIsSearchOpen(false)}
-                  className="ml-2 text-yellow-300"
-                >
-                  <CircleX size={22} />
-                </button>
+        {/* Search bar for mobile */}
+        {isSearchOpen && (
+          <div ref={containerRef} className="absolute inset-0 bg-[#000000] flex flex-col px-4 pt-5 sm:hidden z-50">
+            <div className="flex items-center">
+              <Search size={18} className="text-yellow-200" />
+              <input
+                ref={searchInputRef}
+                type="text"
+                placeholder="Search..."
+                value={searchText}
+                onChange={handleSearchChange}
+                className="ml-2 flex-1 bg-transparent text-white placeholder-yellow-200 focus:outline-none text-sm"
+              />
+              <button onClick={closeSearch} className="ml-2 text-yellow-300">
+                <CircleX size={22} />
+              </button>
+            </div>
+
+            {/* Search Results */}
+            {searchText && (
+              <div className="bg-zinc-950 border border-gray-300 rounded-md mt-4 shadow-lg max-h-80">
+                {filteredMovies.length > 0 ? (
+                  filteredMovies.slice(0, 5).map((movie) => (
+                    <Link
+                      to={`/moviesDetails/${movie._id}`}
+                      key={movie._id}
+                      onClick={closeSearch}
+                      className="block px-4 py-2 text-gray-200 hover:text-[#F8B319]"
+                    > 
+                      {movie.title}
+                    </Link>
+                  ))
+                ) : (
+                  <div className="px-4 py-2 text-gray-300">No movies found</div>
+                )}
               </div>
             )}
+          </div>
+          )}
+
 
             {/* Sidebar Toggle */}
             <div className="hidden sm:flex items-center">
@@ -113,29 +167,12 @@ export default function Navbar() {
             </div>
 
             <div className="hidden sm:flex sm:items-center">
-              {/* <div className="flex space-x-4">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.path}
-                    aria-current={location.pathname === item.path ? "page" : undefined}
-                    className={classNames(
-                      location.pathname === item.path ? 'text-[#F8B319] underline underline-offset-4 font-extrabold' : 'text-white relative',
-                      'rounded-md px-3 py-2 text-sm transition-all duration-300',
-                      'hover:underline hover:underline-offset-4 hover:decoration-2'
-                    )}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-                </div> */}
-                      <NavSearch />
+                  <NavSearch />
             </div>
           </div>
 
 
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-
             {/* Mobile Search Icon */}
             {!isSearchOpen && (
               <button
@@ -145,7 +182,6 @@ export default function Navbar() {
                 <Search size={22} />
               </button>
             )}
-
             <div className="hidden md:block">
             <ModeToggle />    
             </div>

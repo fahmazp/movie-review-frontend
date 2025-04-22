@@ -27,19 +27,41 @@ export default function Navbar() {
   const location = useLocation(); // Get current route
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const searchInputRef = useRef(null); // ref for input
-
+  const searchInputRef = useRef(null) // ref for input
+  const containerRef = useRef(null);
   const { searchText, handleSearchChange, filteredMovies } = useMovieSearch();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
   
+  const closeSearch = () => {
+    setIsSearchOpen(false);
+    handleSearchChange({ target: { value: "" } }); // Clear input
+  };  
+
   useEffect(() => {
     if (isSearchOpen && searchInputRef.current) {
       searchInputRef.current.focus();
     }
   }, [isSearchOpen]);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (containerRef.current && !containerRef.current.contains(event.target)) {
+        setIsSearchOpen(false);
+      }
+    }
+    if (isSearchOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+  
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isSearchOpen])
 
   return (
     <>
@@ -76,46 +98,45 @@ export default function Navbar() {
               </div>
             </div> */}
 
-        {/* Search bar for mobile */}
-        {/* <div className="absolute inset-0 bg-[#000000] flex items-center px-4 sm:hidden z-99"> */}
-
+        {/* Search bar for mobile */} 
         {isSearchOpen && (
-  <div className="absolute inset-0 bg-[#000000] flex flex-col px-4 sm:hidden z-99">
-    <div className="flex items-center">
-      <Search size={18} className="text-yellow-200" />
-      <input
-        ref={searchInputRef}
-        type="text"
-        placeholder="Search..."
-        value={searchText}
-        onChange={handleSearchChange}
-        className="ml-2 flex-1 bg-transparent text-white placeholder-yellow-200 focus:outline-none text-sm"
-      />
-      <button onClick={() => setIsSearchOpen(false)} className="ml-2 text-yellow-300">
-        <CircleX size={22} />
-      </button>
-    </div>
+          <div ref={containerRef} className="absolute inset-0 bg-[#000000] flex flex-col px-4 pt-5 sm:hidden z-50">
+            <div className="flex items-center">
+              <Search size={18} className="text-yellow-200" />
+              <input
+                ref={searchInputRef}
+                type="text"
+                placeholder="Search..."
+                value={searchText}
+                onChange={handleSearchChange}
+                className="ml-2 flex-1 bg-transparent text-white placeholder-yellow-200 focus:outline-none text-sm"
+              />
+              <button onClick={closeSearch} className="ml-2 text-yellow-300">
+                <CircleX size={22} />
+              </button>
+            </div>
 
-    {/* Dropdown Results */}
-    {searchText && (
-      <div className="bg-zinc-950 border border-gray-300 rounded-md mt-2 shadow-lg max-h-80">
-        {filteredMovies.length > 0 ? (
-          filteredMovies.map((movie) => (
-            <Link
-              to={`/moviesDetails/${movie._id}`}
-              key={movie._id}
-              className="block px-4 py-2 text-gray-200 hover:text-[#F8B319]"
-            >
-              {movie.title}
-            </Link>
-          ))
-        ) : (
-          <div className="px-4 py-2 text-gray-500">No movies found</div>
-        )}
-      </div>
-    )}
-  </div>
-)}
+            {/* Search Results */}
+            {searchText && (
+              <div className="bg-zinc-950 border border-gray-300 rounded-md mt-4 shadow-lg max-h-80">
+                {filteredMovies.length > 0 ? (
+                  filteredMovies.slice(0, 5).map((movie) => (
+                    <Link
+                      to={`/moviesDetails/${movie._id}`}
+                      key={movie._id}
+                      onClick={closeSearch}
+                      className="block px-4 py-2 text-gray-200 hover:text-[#F8B319]"
+                    >
+                      {movie.title}
+                    </Link>
+                  ))
+                ) : (
+                  <div className="px-4 py-2 text-gray-300">No movies found</div>
+                )}
+              </div>
+            )}
+          </div>
+          )}
 
             {/* Sidebar Toggle */}
             <div className="hidden sm:flex items-center">
@@ -202,9 +223,9 @@ export default function Navbar() {
             </DisclosureButton>
           ))}
 
-    <div className="mt-2 px-3">
-      <ModeToggle />
-    </div>
+      <div className="mt-2 px-3">
+        <ModeToggle />
+      </div>
 
         </div>
       </DisclosurePanel>
