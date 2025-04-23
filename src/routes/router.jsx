@@ -1,5 +1,4 @@
 import { RootLayout } from "@/layout/RootLayout";
-import { About } from "@/pages/user/About";
 import { Home } from "@/pages/user/Home";
 import { Profile } from "@/pages/user/Profile";
 import { createBrowserRouter } from "react-router-dom";
@@ -13,6 +12,7 @@ import { AdminLayout } from "@/layout/AdminLayout";
 import { AdminProfile } from "@/pages/admin/AdminProfile";
 import { AdminProtectedRoutes } from "./AdminProtectedRoutes";
 import { EditProfile } from "@/pages/user/EditProfile";
+import { WatchlistPage } from "@/pages/user/Watchlist";
 
 
 export const router = createBrowserRouter([
@@ -26,10 +26,6 @@ export const router = createBrowserRouter([
         {
           path: "",
           element: <Home />,
-        },
-        {
-          path: "about",
-          element: <About/>
         },
         {
           path: "login",
@@ -66,7 +62,7 @@ export const router = createBrowserRouter([
             },
             {
               path: "watchlist",
-              element: <h1>watchlist</h1>
+              element: <WatchlistPage />
             },
             {
               path: "password-change",

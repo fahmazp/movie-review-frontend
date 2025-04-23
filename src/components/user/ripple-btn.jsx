@@ -2,8 +2,9 @@ import { useState } from "react";
 
 export default function RippleButton({ 
       children,
-      bgColor = "dark:bg-white/15 dark:hover:bg-white/30",
-      textColor = "text-white"
+      bgColor = "bg-zinc-900 hover:bg-gray-900 dark:bg-white/15 dark:hover:bg-white/30",
+      textColor = "text-white",
+      onClick,
     }) {
 
   const [ripples, setRipples] = useState([]);
@@ -21,10 +22,15 @@ export default function RippleButton({
     setTimeout(() => {
       setRipples((prevRipples) => prevRipples.filter((r) => r.id !== newRipple.id));
     }, 600); 
+    
+    if (onClick) {
+      onClick(event);
+    }
   };
 
   return (
     <button
+    type="button"
       className={`relative overflow-hidden flex items-center px-5 py-1.5 border-2 backdrop-blur-xl font-medium rounded-sm shadow-lg transition-all duration-300 active:scale-95 focus:outline-none tracking-wide ${bgColor} ${textColor}`}
       onClick={createRipple}
     >

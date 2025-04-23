@@ -7,7 +7,7 @@ const navigation = [
     { name: "Home", path: "/", icon: House },
     { name: "Movies", path: "/movies", icon: Clapperboard },
     { name: "TV Shows", path: "/tv-shows", icon: Tv },
-    { name: "Watchlists", path: "/user/watchlists", icon: Popcorn },
+    { name: "Watchlist", path: "/user/watchlist", icon: Popcorn },
     { name: "News", path: "/news", icon: Globe },
     { name: "Profile", path: "/user/profile", icon: CircleUser },
   ]

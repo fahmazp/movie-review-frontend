@@ -1,11 +1,13 @@
-import React from "react"
+import React, { useState } from "react"
 import { useFetch } from "@/hooks/useFetch"
-import { Link, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { BreadcrumbsLink } from "@/components/user/Breadcrumbs"
-import RippleButton from "@/components/user/ripple-btn"
-import { Dot, Plus } from 'lucide-react';
+import { axiosInstance } from "@/config/axiosInstance"
 import { MovieReviews } from "@/components/user/MovieReviews"
 import { PostReview } from "@/components/user/PostReview"
+import RippleButton from "@/components/user/ripple-btn"
+import { Check, Dot, Play, Plus } from 'lucide-react';
+import toast from "react-hot-toast"
 
 export const MoviesDetails = () => {
 
@@ -14,6 +16,32 @@ export const MoviesDetails = () => {
 
   const [movieDetails, isLoading, error] = useFetch(`/movie/movieDetails/${params?.id}`) //url from backend 
   const [avgRating, isRatingLoading, ratingError] = useFetch(`/reviews/avg-rating/${params?.id}`)
+
+  const [isInWatchlist, setIsInWatchlist] = useState(false);
+
+  const handleAddToWatchlist = async () => {
+    try {
+      const payload = {
+        movieId: movieDetails._id,      //same ID as in database
+        title: movieDetails.title,      //title
+        posterUrl: movieDetails.image,  //passing movie image as posterUrl
+      }
+  
+      const response = await axiosInstance.post("/watchlist/addToWatchlist", payload);
+      console.log("Watchlist Response:", response.data);
+      toast.success("Added to Watchlist!");
+      setIsInWatchlist(true);
+    } catch (error) {
+      console.error("Error adding to watchlist:", error.response?.data?.message || error.message)
+
+      if (error.response?.status === 401) {
+        toast.error("Please login to add movies to your Watchlist!");
+      }
+      else {
+        toast.error(error.response?.data?.message || "Failed to add to Watchlist. Try again later.");
+      }
+    }
+  }
 
   return (
     <div>
@@ -24,7 +52,7 @@ export const MoviesDetails = () => {
           <div className="lg:grid lg:grid-cols-2 lg:gap-8">
 
             <div className="shrink-0 max-w-md lg:max-w-lg mx-auto">
-              <div className="w-96 h-96 overflow-hidden rounded-2xl">
+              <div className="w-full sm:w-96 h-96 overflow-hidden rounded-2xl">
                 <img className="p-0.5 w-full rounded-2xl h-full object-cover" src={movieDetails.image} alt="" />
               </div>
             </div>
@@ -71,13 +99,8 @@ export const MoviesDetails = () => {
                       {avgRating?.toFixed(1)} / 5
                     </span>
                   )}
-
                 </div>
-                {/* <Link to="#reviews"
-                    className="text-sm sm:text-base font-medium leading-none text-gray-900 underline hover:no-underline dark:text-white"
-                  >
-                    View Reviews
-                  </Link> */}
+
               </div>
 
               <div className="">
@@ -101,8 +124,28 @@ export const MoviesDetails = () => {
               </div>
 
               <div className="flex gap-4">
-                <RippleButton textColor="dark:text-white"> <Plus size={20} strokeWidth={2.25} className="inline-block mr-1" />Watchlist</RippleButton>
-                <RippleButton bgColor="border-[#F8B319] hover:bg-yellow-600" textColor="text-[#F8B319] hover:text-white" > Watch Trailer</RippleButton>
+                <RippleButton 
+                bgColor="border-[#F8B319] hover:bg-yellow-600" 
+                textColor="text-[#F8B319] hover:text-white" 
+                onClick={handleAddToWatchlist}
+                disabled={isInWatchlist}
+                > 
+               {isInWatchlist ? (
+                 <>
+                   <Check size={20} strokeWidth={2.25} className="inline-block mr-1" /> {/* tick icon */}
+                   Added
+                 </>
+               ) : (
+                 <>
+                   <Plus size={20} strokeWidth={2.25} className="inline-block mr-1" /> {/* plus icon */}
+                   Watchlist
+                 </>
+               )}
+                </RippleButton>
+
+                <RippleButton textColor="text-white"> 
+                  <Play size={16} strokeWidth={2} className="inline-block mr-1" />
+                  Watch Trailer</RippleButton>
               </div>
 
             </div>

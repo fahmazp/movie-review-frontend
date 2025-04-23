@@ -13,7 +13,7 @@ const navigation = [
   { name: "Home", path: "/" },
   { name: "Movies", path: "/movies" },
   { name: "TV Shows", path: "/tv-shows" },
-  { name: "Watchlists", path: "/user/watchlists" },
+  { name: "Watchlist", path: "/user/watchlist" },
   { name: "News", path: "/news" },
   { name: "Profile", path: "/user/profile"}
 ]
