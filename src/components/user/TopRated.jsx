@@ -30,13 +30,12 @@ export default function HomePage() {
   }, []);
 
 
-// top-rated sectn
-
+// top-rated section
   const [topRatedMovies, setTopRatedMovies] = useState([]);
   useEffect(() => {
     const fetchTopRated = async () => {
       try {
-        const res = await fetch('http://localhost:3000/api/reviews/top-rated-movies');
+        const res = await fetch('/api/reviews/top-rated-movies'); // fix needed here for url
         const data = await res.json();
         setTopRatedMovies(data.data);
       } catch (err) {
