@@ -1,6 +1,5 @@
 import EmblaCarousel from "@/components/user/MovieCarousel"
 import HomePage from "@/components/user/TopRated"
-// import { PosterCarousel } from "@/components/user/PosterCarousel"
 import React from "react"
 
 const slides = [0, 1, 2, 3, 4]

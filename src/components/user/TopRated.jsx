@@ -1,6 +1,7 @@
 import { ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Moviescard } from './MoviesCard';
 
 export default function HomePage() {
   const [movies, setMovies] = useState([]);
@@ -26,6 +27,24 @@ export default function HomePage() {
     };
 
     fetchMovies();
+  }, []);
+
+
+// top-rated sectn
+
+  const [topRatedMovies, setTopRatedMovies] = useState([]);
+  useEffect(() => {
+    const fetchTopRated = async () => {
+      try {
+        const res = await fetch('http://localhost:3000/api/reviews/top-rated-movies');
+        const data = await res.json();
+        setTopRatedMovies(data.data);
+      } catch (err) {
+        console.error("Error fetching top-rated movies", err);
+      }
+    };
+  
+    fetchTopRated();
   }, []);
 
   return (
@@ -59,28 +78,20 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Recommended for You */}
       <section>
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-3xl text-[#e69e03] font-bold">Top Rated</h2>
-          <Link to="/movies" className="text-sm text-[#eca308] font-semibold hover:underline hover:underline-offset-3">See all</Link>
-        </div>
-        <div className="grid grid-cols-2 gap-6 md:grid-cols-4 xl:grid-cols-6">
-          {Array.from({ length: 12 }).map((_, idx) => (
-            <div
-              key={idx}
-              className="rounded-lg overflow-hidden bg-zinc-900 hover:scale-105 transition-transform duration-300"
-            >
-              <img
-                src={`https://picsum.photos/id/${idx + 50}/300/400`}
-                alt="Movie Thumbnail"
-                loading="lazy"
-                className="h-48 w-full object-cover"
-              />
-            </div>
-          ))}
-        </div>
-      </section>
+  <div className="flex items-center justify-between mb-4">
+    <h2 className="text-3xl text-[#e69e03] font-bold">Top Rated</h2>
+    <Link to="/movies" className="text-sm text-[#eca308] font-semibold hover:underline hover:underline-offset-3">See all</Link>
+  </div>
+  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+    {topRatedMovies.map((movie) => (
+      <Moviescard movies={movie} key={movie._id} />
+    ))}
+  </div>
+</section>
+
+
+
     </div>
   );
 }

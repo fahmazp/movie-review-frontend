@@ -7,6 +7,7 @@ import { axiosInstance } from "@/config/axiosInstance"
 import { useEffect } from "react"
 import { clearUser, saveUser } from "@/redux/features/userSlice"
 import { SpokeSpinner } from "@/components/user/spinner"
+import { ScrollToTop } from "@/components/user/ScrollToTop"
 
 export const RootLayout = () => {
     const dispatch = useDispatch();
@@ -53,6 +54,7 @@ export const RootLayout = () => {
 
 
         {isUserAuth ? <Header /> : <Baseheader />}
+        <ScrollToTop />
           <Outlet />
         <Footer />
 
