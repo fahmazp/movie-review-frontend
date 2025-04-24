@@ -46,7 +46,10 @@ export default function HomePage() {
   
   //   fetchTopRated();
   // }, []);
-  const [topRatedMovies, error] = useFetch("/reviews/top-rated-movies");
+  const [topRatedMovies, isLoading, error] = useFetch("/reviews/top-rated-movies");
+
+  if (isLoading) return <p className='text-center'>Fetching movies....</p>
+
   if (error) return <p className="text-center text-red-500">Failed to load top rated movies.</p>
 
   return (
