@@ -2,6 +2,7 @@ import { ChevronRight } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Moviescard } from './MoviesCard';
+import { useFetch } from '@/hooks/useFetch';
 
 export default function HomePage() {
   const [movies, setMovies] = useState([]);
@@ -31,20 +32,22 @@ export default function HomePage() {
 
 
 // top-rated section
-  const [topRatedMovies, setTopRatedMovies] = useState([]);
-  useEffect(() => {
-    const fetchTopRated = async () => {
-      try {
-        const res = await fetch('/api/reviews/top-rated-movies'); // fix needed here for url
-        const data = await res.json();
-        setTopRatedMovies(data.data);
-      } catch (err) {
-        console.error("Error fetching top-rated movies", err);
-      }
-    };
+  // const [topRatedMovies, setTopRatedMovies] = useState([]);
+  // useEffect(() => {
+  //   const fetchTopRated = async () => {
+  //     try {
+  //       const res = await fetch('/api/reviews/top-rated-movies'); // fix needed here for url
+  //       const data = await res.json();
+  //       setTopRatedMovies(data.data);
+  //     } catch (err) {
+  //       console.error("Error fetching top-rated movies", err);
+  //     }
+  //   };
   
-    fetchTopRated();
-  }, []);
+  //   fetchTopRated();
+  // }, []);
+  const [topRatedMovies, error] = useFetch("/reviews/top-rated-movies");
+  if (error) return <p className="text-center text-red-500">Failed to load top rated movies.</p>
 
   return (
     <div className="flex flex-col gap-12 p-6 xl:p-10">

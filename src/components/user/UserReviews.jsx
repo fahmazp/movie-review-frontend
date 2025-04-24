@@ -11,7 +11,6 @@ export const UserReviews = () => {
     userId ? `/reviews/user-reviews/${userId}` : null
   )
 
-  // console.log("review data===",reviewData)
 
   if (isProfileLoading || isReviewLoading || !userId) {
     return <div className="text-center">Loading reviews...</div>;
