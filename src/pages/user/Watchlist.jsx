@@ -3,18 +3,43 @@ import { axiosInstance } from "@/config/axiosInstance";
 import { Link } from "react-router-dom"; 
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "react-hot-toast";
-import { Clapperboard, Dot } from "lucide-react";
-// import { Info } from "lucide-react";
+import { Clapperboard, Dot, Star } from "lucide-react";
 
 export const WatchlistPage = () => {
   const [watchlist, setWatchlist] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [createdAt, setCreatedAt] = useState("");
 
+  // const fetchWatchlist = async () => {
+  //   try {
+  //     const response = await axiosInstance.get("/watchlist/viewWatchlists");
+  //     setWatchlist(response.data.watchlist || []);
+  //     setCreatedAt(response.data.createdAt);
+  //   } catch (error) {
+  //     console.error("Error fetching watchlist:", error);
+  //     toast.error("Failed to load your watchlist.");
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+
   const fetchWatchlist = async () => {
     try {
       const response = await axiosInstance.get("/watchlist/viewWatchlists");
-      setWatchlist(response.data.watchlist || []);
+      const watchlistData = response.data.watchlist || [];
+  
+      const enrichedWatchlist = await Promise.all(
+        watchlistData.map(async (movie) => {
+          try {
+            const ratingRes = await axiosInstance.get(`/reviews/avg-rating/${movie.movieId}`);
+            return { ...movie, rating: ratingRes.data.data };
+          } catch {
+            return { ...movie, rating: 0 }; // fallback if rating fails
+          }
+        })
+      );
+  
+      setWatchlist(enrichedWatchlist);
       setCreatedAt(response.data.createdAt);
     } catch (error) {
       console.error("Error fetching watchlist:", error);
@@ -23,6 +48,7 @@ export const WatchlistPage = () => {
       setIsLoading(false);
     }
   };
+  
 
   useEffect(() => {
     fetchWatchlist();
@@ -48,7 +74,6 @@ export const WatchlistPage = () => {
       <span className="text-yellow-500">
         <Dot size={32}/>
       </span>
-      {/* <span className="text-yellow-600 dark:text-yellow-500">Created at {new Date(createdAt).toLocaleDateString()}</span> */}
       <span className="inline-flex items-center gap-x-1.5 rounded-md bg-gray-500/20 px-2 py-1.5 text-sm font-medium text-yellow-600">
         <svg viewBox="0 0 6 6" aria-hidden="true" className="size-1.5 fill-gray-400">
           <circle r={3} cx={3} cy={3} />
@@ -57,17 +82,27 @@ export const WatchlistPage = () => {
       </span>
       </div>
 
-      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {watchlist.map((movie) => (
-          <Card key={movie._id} className="">
-            <Link to={`/movies/${movie.movieId}`}>
+          <Card key={movie._id} className="py-1">
+            <Link to={`/moviesDetails/${movie.movieId}`}>
               <CardContent className="p-4 flex flex-col items-center">
+              <div className="relative w-full h-60 mb-3">
                 <img
                   src={movie.posterUrl}
                   alt={movie.title}
-                  className="w-full h-60 object-cover rounded-md mb-3"
+                  className="w-full h-full object-cover rounded-md hover:shadow-md"
                 />
-                <h2 className="text-lg font-semibold text-center">{movie.title}</h2>
+              </div>    
+              
+                <div className="flex items-center flex-col justify-center gap-0.5">
+                  <h2 className="text-base sm:text-lg font-semibold text-center truncate w-full">{movie.title}</h2>
+                  <span className="inline-flex items-center bg-gradient-to-r from-yellow-200 to-yellow-400 ring-1 ring-yellow-500/50 text-neutral-900 text-[13px] font-bold px-2 py-1 rounded-md shadow-md">
+                    <Star size={16} className="mr-1" color="#d97706" />
+                    {movie.rating?.toFixed(1) || "N/A"}
+                  </span>
+                </div>
+
               </CardContent>
             </Link>
           </Card>
