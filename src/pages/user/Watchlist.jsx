@@ -3,7 +3,7 @@ import { axiosInstance } from "@/config/axiosInstance";
 import { Link } from "react-router-dom"; 
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "react-hot-toast";
-import { Clapperboard, Dot, Star } from "lucide-react";
+import { Clapperboard, Dot, LoaderCircle, Star } from "lucide-react";
 
 export const WatchlistPage = () => {
   const [watchlist, setWatchlist] = useState([]);
@@ -54,9 +54,10 @@ export const WatchlistPage = () => {
     fetchWatchlist();
   }, []);
 
-  if (isLoading) return 
-
-  <p className="text-center mt-10">Loading your watchlist...</p>
+  if (isLoading) return <p className="text-center mt-10 flex justify-center items-center gap-2">
+    Loading your watchlist...
+    <LoaderCircle className="w-5 h-5 animate-spin text-yellow-500" />
+    </p>;
 
   if (watchlist.length === 0) {
     return <p className="text-center mt-10 text-gray-500 dark:text-gray-400">Your watchlist is empty!</p>;
