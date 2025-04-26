@@ -1,3 +1,5 @@
+import { ModeToggle } from "../shared/mode-toggle"
+
 const navigation = {
   main: [
     { name: 'About', href: '#' },
@@ -78,6 +80,9 @@ export default function Footer() {
               <item.icon aria-hidden="true" className="size-6" />
             </a>
           ))}
+          <div className="md:hidden block">
+            <ModeToggle />    
+            </div>    
         </div>
         <p className="mt-10 text-center text-sm/6 text-gray-500">&copy; 2025 HoneyPopcorn, Inc. All rights reserved.</p>
         <p className="text-center text-xs text-[#f8b319]">Crafted By Fahmaz Ashraf</p>

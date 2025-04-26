@@ -223,10 +223,6 @@ export default function Navbar() {
             </DisclosureButton>
           ))}
 
-      <div className="mt-2 px-3">
-        <ModeToggle />
-      </div>
-
         </div>
       </DisclosurePanel>
     </Disclosure>

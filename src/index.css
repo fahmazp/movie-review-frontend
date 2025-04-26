@@ -299,6 +299,11 @@ button {
   transform: translateY(-50%);
   z-index: 10;
 } */
+@media (max-width: 768px) {
+.toggle-mobile {
+height: 26px;
+}
+}
 
 .embla {
   max-width: 50rem;
