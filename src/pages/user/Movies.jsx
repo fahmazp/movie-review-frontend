@@ -3,6 +3,7 @@ import { Moviescard } from "@/components/user/MoviesCard"
 import { MoviecardSkeltons } from "@/components/user/Skeltons"
 import { BreadcrumbsLink } from "@/components/user/Breadcrumbs"
 import { useFetch } from "@/hooks/useFetch"
+import { CircleHelp } from "lucide-react"
 
 export const Movies = ({ type }) => {
   // const { type } = useParams()
@@ -12,9 +13,20 @@ export const Movies = ({ type }) => {
      return <MoviecardSkeltons/>
     }
 
+    if (error) {
+      return (
+        <div className="flex flex-col items-center justify-center h-96">
+          <h2 className="text-xl sm:text-2xl font-bold text-red-500">Oops! Something went wrong 
+            <CircleHelp className="inline-block ml-1.5"/>
+          </h2>
+          <p className="text-xl font-bold text-red-500 mb-3">Try again</p>
+          <p className="text-gray-600 dark:text-gray-400">{error.message || "Failed to load movies."}</p>
+        </div>
+      );
+    }
+
   return (
     <>
-      {/* <h2 className="text-2xl font-bold tracking-tight ">Explore movies</h2> */}
       <BreadcrumbsLink/>
       <div className="mx-auto mt-16 max-w-7xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-2 sm:px-4">
       {movieData?.map((value)=>(

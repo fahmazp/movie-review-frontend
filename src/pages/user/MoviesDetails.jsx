@@ -8,6 +8,7 @@ import { PostReview } from "@/components/user/PostReview"
 import RippleButton from "@/components/user/ripple-btn"
 import { Check, Dot, Play, Plus } from 'lucide-react';
 import toast from "react-hot-toast"
+import { Confetti } from "@/components/magicui/confetti"
 
 export const MoviesDetails = () => {
 
@@ -18,19 +19,36 @@ export const MoviesDetails = () => {
   const [avgRating, isRatingLoading, ratingError] = useFetch(`/reviews/avg-rating/${params?.id}`)
 
   const [isInWatchlist, setIsInWatchlist] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
+
+  // const confettiRef = useRef(null);
 
   const handleAddToWatchlist = async () => {
     try {
       const payload = {
-        movieId: movieDetails._id,      //same ID as in database
-        title: movieDetails.title,      //title
-        posterUrl: movieDetails.image,  //passing movie image as posterUrl
+        movieId: movieDetails._id,
+        title: movieDetails.title,     
+        posterUrl: movieDetails.image, //passing movie image as posterUrl
       }
   
       const response = await axiosInstance.post("/watchlist/addToWatchlist", payload);
       console.log("Watchlist Response:", response.data);
+
       toast.success("Added to Watchlist!");
       setIsInWatchlist(true);
+      // trigger confetti
+      // confettiRef.current?.fire({
+      //   particleCount: 100,
+      //   spread: 70,
+      //   origin: { y: 0.6 },
+      // });
+      // confettiRef.current?.fire({});
+      
+      setShowConfetti(true); 
+      setTimeout(() => {
+        setShowConfetti(false);
+      }, 3000);
+
     } catch (error) {
       console.error("Error adding to watchlist:", error.response?.data?.message || error.message)
 
@@ -44,7 +62,12 @@ export const MoviesDetails = () => {
   }
 
   return (
-    <div>
+    <div className="relative">
+
+  {showConfetti && (
+      <Confetti className="absolute left-0 top-0 z-0 size-full" />
+  )}
+    {/* <Confetti ref={confettiRef} className="absolute left-0 top-0 z-0 size-full" /> */}
       <BreadcrumbsLink />
 
       <section className="py-8 md:py-16 antialiased">
@@ -168,7 +191,6 @@ export const MoviesDetails = () => {
 
 
     </div>
-
 
   )
 }

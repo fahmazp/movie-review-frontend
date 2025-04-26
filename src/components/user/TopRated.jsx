@@ -1,4 +1,4 @@
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Disc3 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Moviescard } from './MoviesCard';
@@ -48,7 +48,9 @@ export default function HomePage() {
   // }, []);
   const [topRatedMovies, isLoading, error] = useFetch("/reviews/top-rated-movies");
 
-  if (isLoading) return <p className='text-center'>Fetching movies....</p>
+  if (isLoading) return <p className='text-center text-yellow-500'>Fetching movies....
+    <Disc3 color="#e69e03" className='inline-block size-6 ml-1 motion-safe:animate-spin'/>
+  </p>
 
   if (error) return <p className="text-center text-red-500">Failed to load top rated movies.</p>
 
