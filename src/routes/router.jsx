@@ -13,7 +13,7 @@ import { AdminProfile } from "@/pages/admin/AdminProfile";
 import { AdminProtectedRoutes } from "./AdminProtectedRoutes";
 import { EditProfile } from "@/pages/user/EditProfile";
 import { WatchlistPage } from "@/pages/user/Watchlist";
-
+import { AdminDashboard } from "@/pages/admin/AdminDashboard";
 
 export const router = createBrowserRouter([
 
@@ -74,30 +74,59 @@ export const router = createBrowserRouter([
     ],
   },
 
-  {
-    path:"admin",
-    element: <AdminLayout/>,
+  // {
+  //   path:"admin",
+  //   element: <AdminLayout/>,
 
-    children:[
-      {
-        path: "login",
-        element: <LoginPageform role="admin"/>
-      },
-      // {
-      //   path: "dashboard",
-      //   element: <AdminProfile />
-      // }
-      {
-        element: <AdminProtectedRoutes />,
-        children: [
-          {
-            path: "profile",
-            element: <AdminProfile />,
-          },
-          // more admin routes here
-        ],
-      },
+  //   children:[
+  //     {
+  //       path: "login",
+  //       element: <LoginPageform role="admin"/>
+  //     },
+  //     {
+  //       element: <AdminProtectedRoutes />,
+  //       children: [
+  //         {
+  //           path: "profile",
+  //           element: <AdminProfile />,
+  //         },
+  //         {
+  //           path: "users",
+  //           element: <UsersManagementPage />,
+  //         },
+  //         {
+  //           path: "movies",
+  //           element: <MoviesManagementPage />,
+  //         },
+          
+  //       ],
+  //     },
       
-    ]
-  }
+  //   ]
+  // }
+  
+  {
+    path: "admin/login",
+    element: <LoginPageform role="admin" />,
+  },
+  {
+    path: "admin",
+    element: (
+      // <AdminProtectedRoutes>
+        <AdminLayout />
+      // </AdminProtectedRoutes>
+    ),
+    children: [
+      {
+        path: "",
+        element: <AdminDashboard />
+      },  
+      {
+        path: "profile",
+        element: <AdminProfile />,
+      },
+
+    ],
+  },
+
 ])

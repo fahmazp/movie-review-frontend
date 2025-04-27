@@ -1,18 +1,18 @@
-import { Outlet, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 export const AdminProtectedRoutes = () => {
-  const { isCheckingAuth, isUserAuth, userDetails } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const { isAdminAuth, isCheckingAdminAuth } = useSelector((state) => state.admin);
 
   useEffect(() => {
-    if (!isCheckingAuth && (!isUserAuth || userDetails?.role !== "admin")) {
-      navigate("/admin/login");
+    if (!isCheckingAdminAuth && !isAdminAuth) {
+      navigate('/admin/login');
     }
-  }, [isCheckingAuth, isUserAuth, userDetails]);
+  }, [isCheckingAdminAuth, isAdminAuth]);
 
-  if (isCheckingAuth) return null;
+  if (isCheckingAdminAuth) return null;
 
   return <Outlet />;
 };

@@ -10,6 +10,7 @@ import { ToggleDemo } from "./pswdToggle";
 import { useState } from "react";
 import { clearUser, saveUser } from "../../redux/features/userSlice";
 import toast from "react-hot-toast";
+import { saveAdmin } from "@/redux/features/adminSlice";
 
 export const LoginPageform = ({ role }) => {
     const { register, handleSubmit } = useForm();
@@ -41,16 +42,27 @@ export const LoginPageform = ({ role }) => {
           const userData = response.data.data; // Ensure backend sends data
           
           console.log("Login successful:", userData);
-          dispatch(saveUser(userData)); // Save user data in Redux
+          // dispatch(saveUser(userData)); // Save user data in Redux
+          if (userData.role === "admin") {
+            dispatch(saveAdmin(userData));
+            localStorage.setItem("adminInfo", JSON.stringify(userData))
+            navigate("/admin/profile")
+          } else {
+            dispatch(saveUser(userData));
+            localStorage.setItem("userInfo", JSON.stringify(userData))
+            navigate("/user/profile")
+          }
+
+          
           toast.success("Login success. Profile loaded!");
-            if (userData.role === "admin") {
-              navigate("/admin/profile"); // Redirect admin
-            } else {
-              navigate("/user/profile"); // Redirect normal user
-            }
+            // if (userData.role === "admin") {
+            //   navigate("/admin/profile"); 
+            // } else {
+            //   navigate("/user/profile");
+            // }
           } catch (error) {
             dispatch(clearUser());
-            toast.error(error.response?.data?.message, "Login Failed");
+            toast.error(error.response?.data?.message || "Login Failed")
             console.log("Login failed:", error.response?.data?.message || error.message);
         }
     };

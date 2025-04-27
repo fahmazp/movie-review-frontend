@@ -44,9 +44,8 @@ export const RootLayout = () => {
     bg-no-repeat bg-cover bg-center 
     opacity-8 dark:opacity-15 -z-10 
     dark:bg-gradient-to-r dark:from-black dark:via-black/70 dark:to-transparent
-    bg-gradient-to-r from-white via-white/50 to-transparent
-  "
-  style={{
+    bg-gradient-to-r from-white via-white/50 to-transparent"
+    style={{
     backgroundImage: "url('/images/Hexagon-bg.svg')",
     backdropFilter: "blur(4px)"
   }}

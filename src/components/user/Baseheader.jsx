@@ -179,7 +179,7 @@ export default function Navbar() {
 
             <Link to="/login">
                 <RippleButton bgColor="border-[#F8B319]">
-                  <span className='text-sm'>Sign In</span>
+                  <span className='text-xs sm:text-sm'>Sign In</span>
                 </RippleButton>
             </Link>    
           </div>
