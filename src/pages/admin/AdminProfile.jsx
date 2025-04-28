@@ -1,6 +1,3 @@
-// import React from "react";
-// import { useSelector } from "react-redux";
-
 // export const AdminProfile = () => {
 //   const { userDetails } = useSelector((state) => state.user);
 
@@ -14,17 +11,13 @@
 //   );
 // };
 export const AdminProfile = () => {
+
   return (
     <>
-    <div className="fixed top-0 left-0 h-full w-full 
-    bg-no-repeat bg-cover bg-center 
-    opacity-8 dark:opacity-15 -z-10 
-    dark:bg-gradient-to-r dark:from-black dark:via-black/70 dark:to-transparent
-    bg-gradient-to-r from-white via-white/50 to-transparent"
-    style={{ backgroundImage: "url('/images/Hexagon-bg.svg')", backdropFilter: "blur(4px)"}} />
+    <div className="mx-auto">
       <h2 className="">AdminProfile123</h2>
 
-      
+    </div>
       </>
   )
 }

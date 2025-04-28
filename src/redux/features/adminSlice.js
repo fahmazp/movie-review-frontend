@@ -9,8 +9,9 @@ export const adminSlice = createSlice({
   },
   reducers: {
     saveAdmin: (state, action) => {
-      state.isAdminAuth = true
-      state.adminData = action.payload
+      // state.isAdminAuth = true
+      // state.adminData = action.payload
+      state.isAdminAuth = action.payload;
       state.isCheckingAdminAuth = false
     },
     clearAdmin: (state) => {

@@ -6,6 +6,6 @@ import adminReducer  from './features/adminSlice'
 export default configureStore({
   reducer: {
     user: userReducer, // Register the auth slice
-    admin: adminReducer
+    admin: adminReducer,
   },
 })
