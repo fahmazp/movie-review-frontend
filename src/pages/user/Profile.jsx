@@ -4,8 +4,16 @@ import { SquareUser, Calendar, Smartphone } from 'lucide-react';
 import { SkeletonUser } from "@/components/user/UserSkelton";
 import { UserReviews } from "@/components/user/UserReviews";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 export const Profile = () => {
+
+  useEffect(() => {
+    const adminInfo = localStorage.getItem("adminInfo");
+    if (adminInfo) {
+      navigate("/admin"); // or redirect them to dashboard
+    }
+  }, []);  
 
   const { isUserAuth, isCheckingAuth } = useSelector((state) => state.user);
   if (isCheckingAuth) return null

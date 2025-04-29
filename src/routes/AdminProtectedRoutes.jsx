@@ -1,42 +1,55 @@
-import { useDispatch, useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+// import { Outlet, useNavigate } from "react-router-dom";
+// import { useEffect } from "react";
+// import { saveAdmin } from "@/redux/features/adminSlice";
+// import { axiosInstance } from "@/config/axiosInstance";
+
+// export const AdminProtectedRoutes = () => {
+//   // const dispatch = useDispatch();
+  
+//   const { isAdminAuth, isCheckingAdminAuth } = useSelector((state) => state.admin);
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     const checkAdminAuth = async () => {
+//       try {
+//         const { data } = await axiosInstance.get("/admin/check-auth");
+//         if (data.isAuthenticated) {
+//           dispatch(saveAdmin(true));
+//         } else {
+//           dispatch(saveAdmin(false));
+//           navigate("/admin/login");
+//         }
+//       } catch (error) {
+//         console.error("Error checking admin auth:", error);
+//         dispatch(saveAdmin(false));
+//         navigate("/admin/login");
+//       }
+//     };
+
+//     checkAdminAuth();
+//   }, []);
+
+//   if (isCheckingAdminAuth) return null;
+
+//   return <Outlet />;
+// };
+
+import { useSelector } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { saveAdmin } from "@/redux/features/adminSlice";
-import { axiosInstance } from "@/config/axiosInstance";
 
 export const AdminProtectedRoutes = () => {
+  const { isAdminAuth, isCheckingAuth } = useSelector((state) => state.admin);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const { isAdminAuth, isCheckingAdminAuth } = useSelector((state) => state.admin);
-
-  // useEffect(() => {
-  //   if (!isCheckingAdminAuth && !isAdminAuth) {
-  //     navigate('/admin/login');
-  //   }
-  // }, [isCheckingAdminAuth, isAdminAuth]);
 
   useEffect(() => {
-    const checkAdminAuth = async () => {
-      try {
-        const { data } = await axiosInstance.get("/admin/check-auth");
-        if (data.isAuthenticated) {
-          dispatch(saveAdmin(true));
-        } else {
-          dispatch(saveAdmin(false));
-          navigate("/admin/login");
-        }
-      } catch (error) {
-        console.error("Error checking admin auth:", error);
-        dispatch(saveAdmin(false));
-        navigate("/admin/login");
-      }
-    };
+    if (!isCheckingAuth && !isAdminAuth) {
+      navigate("/admin/login");
+    }
+  }, [isCheckingAuth, isAdminAuth]);
 
-    checkAdminAuth();
-  }, []);
-
-  if (isCheckingAdminAuth) return null;
+  if (isCheckingAuth) return null;
 
   return <Outlet />;
 };

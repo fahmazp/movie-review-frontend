@@ -10,7 +10,7 @@ import { ToggleDemo } from "./pswdToggle";
 import { useState } from "react";
 import { clearUser, saveUser } from "../../redux/features/userSlice";
 import toast from "react-hot-toast";
-import { saveAdmin } from "@/redux/features/adminSlice";
+import { clearAdmin, saveAdmin } from "@/redux/features/adminSlice";
 
 export const LoginPageform = ({ role }) => {
     const { register, handleSubmit } = useForm();
@@ -28,12 +28,6 @@ export const LoginPageform = ({ role }) => {
     profileRoute: "/user/profile", // Default user route
     signupRoute: "/signup",
   }
-    // const user = {
-    //   role: role || "user", // Default to user
-    //   loginAPI: "/user/login", // Always use this endpoint
-    //   profileRoute: role === "admin" ? "/admin/profile" : "/user/profile",
-    //   signupRoute: role === "admin" ? "/admin/signup" : "/signup",
-    // };
 
     const onSubmit = async (data) => {
 
@@ -42,12 +36,28 @@ export const LoginPageform = ({ role }) => {
           const userData = response.data.data; // Ensure backend sends data
           
           console.log("Login successful:", userData);
-          // dispatch(saveUser(userData)); // Save user data in Redux
+          
+          // if (userData.role === "admin") {
+          //   dispatch(saveAdmin(userData));
+          //   localStorage.setItem("adminInfo", JSON.stringify(userData))
+          //   navigate("/admin/profile")
+          // } else {
+          //   dispatch(saveUser(userData));
+          //   localStorage.setItem("userInfo", JSON.stringify(userData))
+          //   navigate("/user/profile")
+          // }          
+
           if (userData.role === "admin") {
+            
+            localStorage.removeItem("userInfo");
+            dispatch(clearUser());
             dispatch(saveAdmin(userData));
             localStorage.setItem("adminInfo", JSON.stringify(userData))
             navigate("/admin/profile")
           } else {
+
+            localStorage.removeItem("adminInfo");
+            dispatch(clearAdmin());
             dispatch(saveUser(userData));
             localStorage.setItem("userInfo", JSON.stringify(userData))
             navigate("/user/profile")
