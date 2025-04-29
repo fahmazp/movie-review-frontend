@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { axiosInstance } from "@/config/axiosInstance";
 import { useDispatch } from "react-redux";
 import { saveUser } from "@/redux/features/userSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import logo from "../../assets/images/image 1.png";
 
@@ -150,9 +150,9 @@ export const SignupPageform = () => {
               </div>
               <p className="text-center pt-2 text-sm/6 text-gray-500">
             Already have an account?{' '}
-            <a href="#" className="text-indigo-600 hover:text-indigo-500">
+              <Link to="/login" className="text-indigo-600 hover:text-indigo-500">
                 Login Here
-              </a>
+              </Link>
               </p>
 
             </div>

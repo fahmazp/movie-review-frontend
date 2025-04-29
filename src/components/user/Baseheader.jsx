@@ -1,6 +1,6 @@
 import React,{ useEffect, useRef, useState } from 'react';
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
-import { AlignLeft, CircleX, Search, SquareChartGantt } from 'lucide-react';
+import { AlignLeft, CircleX, Search, SquareChartGantt, X } from 'lucide-react';
 import { ModeToggle } from "../shared/mode-toggle";
 import logo from "../../assets/images/image 1.png";
 import { Link, useLocation  } from 'react-router-dom';
@@ -74,8 +74,8 @@ export default function Navbar() {
             <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-1 text-gray-200 hover:bg-transparent hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset cursor-pointer">
               <span className="absolute -inset-0.5" />
               <span className="sr-only">Open main menu</span>
-              <AlignLeft aria-hidden="true" className="block size-5 group-data-open:hidden" />
-              <CircleX aria-hidden="true" className="hidden size-5 group-data-open:block" />
+              <AlignLeft aria-hidden="true" className="block size-6 group-data-open:hidden" />
+              <X aria-hidden="true" className="hidden size-6 group-data-open:block" />
             </DisclosureButton>
           </div>
 
