@@ -14,7 +14,7 @@ export default function HomePage() {
         const API_KEY = '313f8af1';
         
         // List of IMDb IDs
-        const imdbIDs = ['tt4154796', 'tt31193180', 'tt6208148', 'tt10505918', 'tt3566834', 'tt12299608', 'tt0388629', 'tt10676052', 'tt4154756',]; // Replace with the IDs you want
+        const imdbIDs = ['tt4154756', 'tt31193180', 'tt10505918', 'tt3566834', 'tt12299608',  'tt31945132', 'tt0388629', 'tt20969586', 'tt10676052', 'tt6208148',  ];
 
         // Fetching movie data using Promise.all
         const movieData = await Promise.all(

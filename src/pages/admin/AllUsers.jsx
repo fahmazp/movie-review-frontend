@@ -26,11 +26,11 @@ const UsersDashboard = () => {
 
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Admin Dashboard</h2>
-      <div className="overflow-x-auto">
-        <table className="min-w-full table-auto border border-gray-200">
-          <thead>
-            <tr className="bg-gray-100">
+      <h2 className="text-2xl font-bold mb-4">Users Dashboard</h2>
+      <div className="overflow-x-auto rounded border border-amber-500">
+        <table className="min-w-full table-auto text-sm">
+          <thead className="bg-gray-200 dark:bg-gray-950">
+            <tr>
               <th className="px-4 py-2 text-left">Name</th>
               <th className="px-4 py-2 text-left">Email</th>
               <th className="px-4 py-2 text-left">Mobile</th>
@@ -40,7 +40,7 @@ const UsersDashboard = () => {
           </thead>
           <tbody>
             {users.map((user) => (
-              <tr key={user._id} className="border-t">
+              <tr key={user._id} className="border-t bg-gray-100 dark:bg-gray-900">
                 <td className="px-4 py-2">{user.name}</td>
                 <td className="px-4 py-2">{user.email}</td>
                 <td className="px-4 py-2">{user.mobile}</td>
@@ -57,6 +57,13 @@ const UsersDashboard = () => {
           </tbody>
         </table>
       </div>
+
+      <div>  
+      <p className="mt-4 text-sm sm:text-base font-bold">
+      Total users: <span className="">{users.length}</span>
+      </p>
+      </div>
+      
     </div>
   );
 };

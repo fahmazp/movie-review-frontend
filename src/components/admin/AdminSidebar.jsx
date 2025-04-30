@@ -88,7 +88,7 @@ export default function AdminSidebar() {
                                 aria-hidden="true"
                                 className={classNames(
                                   item.current ? 'text-white' : 'text-indigo-200 group-hover:text-white',
-                                  'size-6 shrink-0',
+                                  'size-5 shrink-0',
                                 )}
                               />
                               {item.name}
@@ -139,7 +139,7 @@ export default function AdminSidebar() {
                       'group flex gap-x-3 rounded p-2 text-sm font-semibold',
                     )}
                   >
-                    <item.icon className="h-6 w-6 shrink-0" />
+                    <item.icon className="h-5 w-5 shrink-0" />
                     {item.name}
                   </Link>
                       </li>

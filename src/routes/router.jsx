@@ -15,6 +15,7 @@ import { EditProfile } from "@/pages/user/EditProfile";
 import { WatchlistPage } from "@/pages/user/Watchlist";
 import { AdminDashboard } from "@/pages/admin/AdminDashboard";
 import UsersDashboard from "@/pages/admin/AllUsers";
+import MoviesDashboard from "@/pages/admin/movies/AllMovies";
 
 export const router = createBrowserRouter([
 
@@ -119,7 +120,8 @@ export const router = createBrowserRouter([
         children: [
           { path: "", element: <AdminDashboard /> },
           { path: "profile", element: <AdminProfile /> },
-          { path: "users", element: <UsersDashboard /> }
+          { path: "users", element: <UsersDashboard /> },
+          { path: "movies", element: <MoviesDashboard /> }
         ]
       }
     ]
