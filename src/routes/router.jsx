@@ -14,6 +14,7 @@ import { AdminProtectedRoutes } from "./AdminProtectedRoutes";
 import { EditProfile } from "@/pages/user/EditProfile";
 import { WatchlistPage } from "@/pages/user/Watchlist";
 import { AdminDashboard } from "@/pages/admin/AdminDashboard";
+import UsersDashboard from "@/pages/admin/AllUsers";
 
 export const router = createBrowserRouter([
 
@@ -97,8 +98,7 @@ export const router = createBrowserRouter([
   //         {
   //           path: "movies",
   //           element: <MoviesManagementPage />,
-  //         },
-          
+  //         },        
   //       ],
   //     },
       
@@ -119,6 +119,7 @@ export const router = createBrowserRouter([
         children: [
           { path: "", element: <AdminDashboard /> },
           { path: "profile", element: <AdminProfile /> },
+          { path: "users", element: <UsersDashboard /> }
         ]
       }
     ]

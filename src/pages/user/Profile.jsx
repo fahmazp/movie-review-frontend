@@ -4,16 +4,8 @@ import { SquareUser, Calendar, Smartphone } from 'lucide-react';
 import { SkeletonUser } from "@/components/user/UserSkelton";
 import { UserReviews } from "@/components/user/UserReviews";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
 
 export const Profile = () => {
-
-  useEffect(() => {
-    const adminInfo = localStorage.getItem("adminInfo");
-    if (adminInfo) {
-      navigate("/admin"); // or redirect them to dashboard
-    }
-  }, []);  
 
   const { isUserAuth, isCheckingAuth } = useSelector((state) => state.user);
   if (isCheckingAuth) return null
@@ -26,6 +18,11 @@ const [userDetails, isLoading, error] = useFetch("/user/profile")
      return <SkeletonUser/>
     }
 
+    if (error) {
+      return ( <div>
+        <h3 className="text-center">Oops! Something went wrong.</h3>
+          <p className="text-center">{error.message || "Failed to load profile info!"}</p>
+        </div> ) }
 
 //Date formatting function
 const formatJoinDate = (dateString) => {
@@ -36,10 +33,8 @@ const formatJoinDate = (dateString) => {
   });
 }
 
-
   return   (
-    <div>
-      
+    <div>      
     <div className="mx-auto max-w-7xl lg:col-start-3 lg:row-end-1 mt-2 sm:mt-10 mb-8 px-2 sm:px-8">
       <h2 className="sr-only">Summary</h2>
       <div className="rounded-sm bg-gray-100 dark:bg-[#000000] ring-1 shadow-xs ring-gray-900/5 dark:ring-gray-100/10">

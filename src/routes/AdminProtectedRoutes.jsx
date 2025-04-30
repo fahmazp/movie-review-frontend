@@ -26,12 +26,10 @@
 //         navigate("/admin/login");
 //       }
 //     };
-
 //     checkAdminAuth();
 //   }, []);
 
 //   if (isCheckingAdminAuth) return null;
-
 //   return <Outlet />;
 // };
 
