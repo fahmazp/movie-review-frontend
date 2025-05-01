@@ -5,20 +5,20 @@ import React from "react"
 
 
     return (
-      <div className="relative w-full max-w-xs mx-auto bg-white border overflow-hidden border-gray-200 rounded-3xl drop-shadow-2xl dark:drop-shadow-none dark:bg-neutral-950 dark:border-neutral-900 mb-6">
+      <div className="relative w-full max-w-xs mx-auto bg-white border overflow-hidden border-gray-200 rounded-sm drop-shadow-2xl dark:drop-shadow-none dark:bg-neutral-950 dark:border-neutral-900 mb-6">
 
-        <span className="absolute top-0 right-0 bg-[#F8B319] text-zinc-900 text-xl font-extrabold px-4 py-1.5 rounded-tr-2xl rounded-bl-2xl shadow-md">
+        <span className="absolute top-0 right-0 bg-[#F8B319] text-zinc-900 text-xl font-extrabold px-4 py-1.5 rounded-tr-sm rounded-bl-2xl shadow-md">
         4.1
         </span>
 
-        <div className="w-full h-64 overflow-hidden rounded-t-3xl mb-2">
+        <div className="w-full h-64 overflow-hidden rounded-t-sm mb-2" style={{ aspectRatio: '2/3' }}>
         <Link to={`/moviesDetails/${movies?._id}`}>
           <img className="rounded-b-xs w-full h-full object-cover" 
           src={movies?.image} alt={movies?.title} />
         </Link>
         </div>
 
-        <div className="px-5 pb-4">
+        <div className="px-2 pb-2">
           <Link to={`/moviesDetails/${movies?._id}`}>
             <h5 className="text-lg tracking-wide text-gray-900 dark:text-white">
               {movies.title}

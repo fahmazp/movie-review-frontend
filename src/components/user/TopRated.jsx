@@ -93,7 +93,7 @@ export default function HomePage() {
     <h2 className="text-3xl text-[#e69e03] font-bold">Top Rated</h2>
     <Link to="/movies" className="text-sm text-[#eca308] font-semibold hover:underline hover:underline-offset-3">See all</Link>
   </div>
-  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+  <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
     {topRatedMovies.map((movie) => (
       <Moviescard movies={movie} key={movie._id} />
     ))}
