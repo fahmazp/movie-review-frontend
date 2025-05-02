@@ -166,7 +166,7 @@ export default function Navbar() {
               </button>
             </div>
 
-            <div className="hidden sm:flex sm:items-center">
+            <div className="hidden sm:flex sm:items-center w-full">
                   <NavSearch />
             </div>
           </div>

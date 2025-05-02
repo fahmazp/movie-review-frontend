@@ -13,7 +13,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Star } from "lucide-react";
 
 export const MovieReviews = ({ movieId }) => {
-  // console.log("movieId passed to MovieReviews:", movieId)
+  
   const [reviews, isLoading, error] = useFetch(`/reviews/movie-reviews/${movieId}`);
 
   const [open, setOpen] = useState(false);

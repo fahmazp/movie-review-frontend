@@ -155,13 +155,10 @@ export default function Navbar() {
               </button>
             </div>
 
-            <div className="hidden sm:flex sm:items-center">
-                <div>
-                      <NavSearch />
-                </div>
+            <div className="hidden sm:flex sm:items-center w-full">
+                  <NavSearch />  
             </div>
           </div>
-
 
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:gap-3 sm:ml-6 sm:pr-0">
             {/* Mobile Search Icon */}

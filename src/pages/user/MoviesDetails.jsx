@@ -13,10 +13,10 @@ import { Confetti } from "@/components/magicui/confetti"
 export const MoviesDetails = () => {
 
   const params = useParams()
-  console.log(params, "===use params");
 
   const [movieDetails, isLoading, error] = useFetch(`/movie/movieDetails/${params?.id}`) //url from backend 
   const [avgRating, isRatingLoading, ratingError] = useFetch(`/reviews/avg-rating/${params?.id}`)
+  const [reviews, isReviewsLoading, reviewsError] = useFetch(`/reviews/movie-reviews/${params?.id}`);
 
   const [isInWatchlist, setIsInWatchlist] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
@@ -36,13 +36,6 @@ export const MoviesDetails = () => {
 
       toast.success("Added to Watchlist!");
       setIsInWatchlist(true);
-      // trigger confetti
-      // confettiRef.current?.fire({
-      //   particleCount: 100,
-      //   spread: 70,
-      //   origin: { y: 0.6 },
-      // });
-      // confettiRef.current?.fire({});
       
       setShowConfetti(true); 
       setTimeout(() => {
@@ -122,6 +115,10 @@ export const MoviesDetails = () => {
                       {avgRating?.toFixed(1)} / 5
                     </span>
                   )}
+                </div>
+
+                <div>
+                  <span className="text-yellow-600 dark:text-yellow-300"> ({reviews?.length ?? 0} reviews)</span>
                 </div>
 
               </div>

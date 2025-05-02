@@ -3,28 +3,12 @@ import { useMovieSearch } from "@/hooks/useMovieSearch";
 import { Link } from "react-router-dom"; 
 
 export const NavSearch = () => {
-  // const [searchText, setSearchText] = useState("");
-  // const [allMovies] = useFetch("/movie/allMovies");
-  // const [filteredMovies, setFilteredMovies] = useState([]);
 
-  // const handleSearchChange = (e) => {
-  //   const value = e.target.value;
-  //   setSearchText(value);
-
-  //   if (value.trim() !== "") {
-  //     const filtered = allMovies?.filter((movie) =>
-  //       movie.title.toLowerCase().includes(value.toLowerCase())
-  //     );
-  //     setFilteredMovies(filtered);
-  //   } else {
-  //     setFilteredMovies([]);
-  //   }
-  // }
   const { searchText, handleSearchChange, filteredMovies } = useMovieSearch();
   
   return (
-    <div className="mt-1 ml-8 md:w-80">
-      <div className="relative flex items-center rounded-sm bg-[#21242D] px-2 outline-1 -outline-offset-1 outline-gray-900 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-[#F8B319]">
+    <div className="mt-1 ml-4 md:w-72 xl:w-96">
+      <div className="relative flex items-center rounded-full bg-[#21242D] px-2 outline-1 -outline-offset-1 outline-gray-900 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-[#F8B319]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -46,7 +30,7 @@ export const NavSearch = () => {
           placeholder="Search Movies"
           value={searchText}
           onChange={handleSearchChange}
-          className="w-full px-2 py-1.5 bg-[#21242D] text-sm text-white focus:outline-none"
+          className="w-full px-2 py-2 bg-[#21242D] text-sm text-white focus:outline-none rounded-full"
         />
 
         {/* Command Box */}

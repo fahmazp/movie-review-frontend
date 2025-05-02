@@ -9,6 +9,7 @@ export const Movies = ({ type }) => {
   // const { type } = useParams()
   const [movieData, isLoading, error] = useFetch(`/movie/allMovies?type=${type}`)
 
+  
     if (isLoading) {
      return <MoviecardSkeltons/>
     }

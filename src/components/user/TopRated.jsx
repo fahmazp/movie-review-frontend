@@ -31,22 +31,6 @@ export default function HomePage() {
     fetchMovies();
   }, []);
 
-
-// top-rated section
-  // const [topRatedMovies, setTopRatedMovies] = useState([]);
-  // useEffect(() => {
-  //   const fetchTopRated = async () => {
-  //     try {
-  //       const res = await fetch('/api/reviews/top-rated-movies'); // fix needed here for url
-  //       const data = await res.json();
-  //       setTopRatedMovies(data.data);
-  //     } catch (err) {
-  //       console.error("Error fetching top-rated movies", err);
-  //     }
-  //   };
-  
-  //   fetchTopRated();
-  // }, []);
   const [topRatedMovies, isLoading, error] = useFetch("/reviews/top-rated-movies");
 
   if (isLoading) return <div> <p className='text-center text-yellow-500'>Fetching movies....
