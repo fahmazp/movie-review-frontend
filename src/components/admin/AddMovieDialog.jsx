@@ -65,7 +65,7 @@ const AddMovieDialog = ({ onMovieAdded }) => {
       <DialogTrigger asChild>
         <Button className="mt-2 bg-yellow-500 text-black hover:bg-yellow-600">+ Add Movie</Button>
       </DialogTrigger>
-      <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-[600px]">
+      <DialogContent className="max-h-[90vh] overflow-y-auto w-full sm:max-w-[600px]">
         <DialogHeader>
           <DialogTitle>Add a New Movie</DialogTitle>
           <DialogDescription>Fill in the details and click save to add the movie.</DialogDescription>

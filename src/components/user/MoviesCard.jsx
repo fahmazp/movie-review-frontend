@@ -19,8 +19,9 @@ import React from "react"
         </div>
 
         <div className="px-2 pb-2">
-          <Link to={`/moviesDetails/${movies?._id}`}>
-            <h5 className="text-lg tracking-wide text-gray-900 dark:text-white">
+          <Link to={`/moviesDetails/${movies?._id}`} className="group">
+            <h5 className="text-lg tracking-wide text-gray-900 dark:text-white group-hover:text-yellow-700 dark:group-hover:text-orange-200 
+                 transition-colors duration-200">
               {movies.title}
             </h5>
           </Link>
