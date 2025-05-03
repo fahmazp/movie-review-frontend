@@ -60,7 +60,6 @@ export const MoviesDetails = () => {
   {showConfetti && (
       <Confetti className="absolute left-0 top-0 z-0 size-full" />
   )}
-    {/* <Confetti ref={confettiRef} className="absolute left-0 top-0 z-0 size-full" /> */}
       <BreadcrumbsLink />
 
       <section className="py-8 md:py-16 antialiased">

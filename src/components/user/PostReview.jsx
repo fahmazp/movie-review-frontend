@@ -119,7 +119,7 @@ export const PostReview = ({ movieId, onReviewSubmitted }) => {
         <textarea
           value={comment}
           onChange={(e) => setComment(e.target.value)}
-          className="border-2 p-2 rounded-md w-full h-24 border-amber-500 focus:outline-none focus:border-zinc-600"
+          className="border-2 p-2 rounded-md w-full h-48 border-amber-500 focus:outline-none focus:border-zinc-600"
           placeholder="Write your thoughts..."
           required
           />

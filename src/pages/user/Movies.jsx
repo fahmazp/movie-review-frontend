@@ -6,7 +6,7 @@ import { useFetch } from "@/hooks/useFetch"
 import { CircleHelp } from "lucide-react"
 
 export const Movies = ({ type }) => {
-  // const { type } = useParams()
+  
   const [movieData, isLoading, error] = useFetch(`/movie/allMovies?type=${type}`)
 
   
