@@ -3,9 +3,9 @@ import { ModeToggle } from "../shared/mode-toggle"
 
 const navigation = {
   main: [
-    { name: 'About', path: '/about' },
-    { name: 'Blog', path: '#' },
-    { name: 'Jobs', path: '#' },
+    { name: 'Movies', path: '/movies' },
+    { name: 'TV Shows', path: '/tv-shows' },
+    { name: 'Watchlist', path: '#' },
     { name: 'Dashboard', path: '/admin/login' },
   ],
   social: [

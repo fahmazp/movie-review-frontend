@@ -4,7 +4,7 @@ import { ChevronLeft } from 'lucide-react';
 export const BreadcrumbsLink = () => {
     return (
     <nav aria-label="Breadcrumb">
-      <ol className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:mt-4 sm:px-6 lg:max-w-7xl lg:px-8">
+      <ol className="mx-auto flex max-w-2xl items-center space-x-2 px-4 mt-2 sm:mt-4 sm:px-6 lg:max-w-7xl lg:px-8">
         <li>
           <Link to="/" className="flex items-center space-x-1">
           <div>

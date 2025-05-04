@@ -8,19 +8,6 @@ const MoviesDashboard = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const fetchMovies = async () => {
-  //     try {
-  //       const res = await axiosInstance.get("/movie/allMovies");
-  //       setMovies(res.data.data || []);
-  //     } catch (err) {
-  //       console.error("Error fetching movies:", err);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   fetchMovies();
-  // }, []);
   const fetchMovies = async () => {
     try {
       const res = await axiosInstance.get("/movie/allMovies");
@@ -39,10 +26,10 @@ const MoviesDashboard = () => {
   if (loading) return <p className="p-4">Loading movies...</p>;
 
   return (
-    <div className="p-6">
+    <div className="sm:p-6">
       <h2 className="text-2xl font-bold mb-4">Movies List</h2>
-      <div className=" rounded border border-yellow-500">
-        <table className="min-w-full table-auto text-sm">
+      <div className="w-full overflow-x-auto rounded border border-yellow-500">
+        <table className="min-w-[700px] w-full table-auto text-sm">
           <thead className="bg-gray-200 dark:bg-gray-950 text-left">
             <tr>
               <th className="px-3 py-2">Title</th>
@@ -57,10 +44,10 @@ const MoviesDashboard = () => {
           <tbody>
             {movies.map((movie) => (
               <tr key={movie._id} className="border-t bg-gray-100 dark:bg-gray-900">
-                <td className="px-3 py-2">{movie.title}</td>
-                <td className="px-3 py-2">{movie.genre}</td>
-                <td className="px-3 py-2 capitalize">{movie.media_type}</td>
-                <td className="px-3 py-2">
+                <td className="px-3 py-2 whitespace-nowrap">{movie.title}</td>
+                <td className="px-3 py-2 whitespace-nowrap">{movie.genre}</td>
+                <td className="px-3 py-2 whitespace-nowrap capitalize">{movie.media_type}</td>
+                <td className="px-3 py-2 whitespace-nowrap">
                   {new Date(movie.releaseDate).getFullYear()}
                 </td>
                 <td className="px-4 py-2">
@@ -89,8 +76,8 @@ const MoviesDashboard = () => {
       </div>
 
             
-      <div className="flex mt-3 justify-between">
-      <p className="mt-4 text-sm sm:text-base ">
+      <div className="flex sm:flex-row mt-3 justify-between gap-4">
+      <p className="text-sm sm:text-base ">
         Total Movies: <strong>{movies.length}</strong>
       </p>
 

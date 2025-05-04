@@ -7,16 +7,14 @@ export const AdminLayout = () => {
   // const { userDetails } = useSelector((state) => state.user);
   
   return (
-    <div className="min-h-screen flex flex-col">
-      <div className="fixed top-0 left-0 h-full w-full 
-    bg-no-repeat bg-cover bg-center 
-    opacity-8 dark:opacity-15 -z-10 
+    <div className="">
+      <div className="fixed top-0 left-0 h-full w-full bg-no-repeat bg-cover bg-center opacity-8 dark:opacity-15 -z-10 
     dark:bg-gradient-to-r dark:from-black dark:via-black/70 dark:to-transparent
     bg-gradient-to-r from-white via-white/50 to-transparent"
     style={{ backgroundImage: "url('/images/Hexagon-bg.svg')", backdropFilter: "blur(4px)"}} />
 
       <AdminSidebar />
-      <div className="flex-1 flex flex-col">
+      <div className="lg:flex flex-1 flex-col">
         {/* Top Navbar */}
 
       <main className="flex-1 p-4 bg-transparent mx-auto">
