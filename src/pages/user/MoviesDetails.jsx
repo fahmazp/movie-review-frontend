@@ -124,12 +124,12 @@ export const MoviesDetails = () => {
 
               <div className="">
                 {/* <h3 className="underline underline-offset-4 mb-1">Description :</h3> */}
-                <p className="mb-6 text-gray-700 dark:text-gray-300 first-letter:uppercase">
+                <p className="text-gray-700 dark:text-gray-300 first-letter:uppercase">
                   {movieDetails.description}
                 </p>
               </div>
 
-              <div className="my-3">
+              <div className="my-2.5">
                 {movieDetails?.directedBy && (
                   <p className="text-base text-[#2a2c32] font-semibold dark:text-gray-300 mt-1">
                     <span className="font-semibold text-[#f8b319]">Director :</span> {movieDetails.directedBy}

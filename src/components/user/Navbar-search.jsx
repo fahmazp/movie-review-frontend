@@ -8,7 +8,7 @@ export const NavSearch = () => {
   
   return (
     <div className="mt-1 ml-4 md:w-72 xl:w-96">
-      <div className="relative flex items-center rounded-full bg-[#21242D] px-2 outline-1 -outline-offset-1 outline-gray-900 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-[#F8B319]">
+      <div className="relative flex items-center rounded-full bg-slate-950/50 px-2 outline-2 -outline-offset-1 outline-gray-700 has-[input:focus-within]:outline-2 has-[input:focus-within]:-outline-offset-2 has-[input:focus-within]:outline-[#F8B319]">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -30,7 +30,7 @@ export const NavSearch = () => {
           placeholder="Search Movies"
           value={searchText}
           onChange={handleSearchChange}
-          className="w-full px-2 py-2 bg-[#21242D] text-sm text-white focus:outline-none rounded-full"
+          className="w-full px-2 py-2 text-sm text-white focus:outline-none rounded-full placeholder:text-gray-300"
         />
 
         {/* Command Box */}

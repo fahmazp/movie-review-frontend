@@ -94,8 +94,8 @@ export default function Navbar() {
             <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-200 hover:bg-transparent hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset cursor-pointer">
               <span className="absolute -inset-0.5" />
               <span className="sr-only">Open main menu</span>
-              <AlignLeft aria-hidden="true" className="block size-6 group-data-open:hidden" />
-              <X aria-hidden="true" className="hidden size-6 group-data-open:block" />
+              <AlignLeft color="#F8B319" aria-hidden="true" className="block size-7 group-data-open:hidden" />
+              <X aria-hidden="true" color="#F8B319" className="hidden size-6 group-data-open:block" />
             </DisclosureButton>
           </div>
 
@@ -159,7 +159,7 @@ export default function Navbar() {
                   <CircleX className="size-6" />
                 ) : (
                   <div className="flex items-center gap-2">
-                  <SquareChartGantt className="size-6 hidden sm:block" />
+                  <SquareChartGantt color="#F8B319" className="size-6 hidden sm:block" />
                   <span className="text-sm font-semibold sm:block hidden">Menu</span>
                   </div>
                 )}

@@ -74,8 +74,8 @@ export default function Navbar() {
             <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-1 text-gray-200 hover:bg-transparent hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset cursor-pointer">
               <span className="absolute -inset-0.5" />
               <span className="sr-only">Open main menu</span>
-              <AlignLeft aria-hidden="true" className="block size-6 group-data-open:hidden" />
-              <X aria-hidden="true" className="hidden size-6 group-data-open:block" />
+              <AlignLeft color="#F8B319" aria-hidden="true" className="block size-7 group-data-open:hidden" />
+              <X aria-hidden="true" color="#F8B319" className="hidden size-6 group-data-open:block" />
             </DisclosureButton>
           </div>
 
@@ -148,7 +148,7 @@ export default function Navbar() {
                   <CircleX className="size-6" />
                 ) : (
                   <div className="flex items-center gap-2">
-                  <SquareChartGantt className="size-6 hidden sm:block" />
+                  <SquareChartGantt color="#F8B319" className="size-6 hidden sm:block" />
                   <span className="text-sm font-semibold sm:block hidden">Menu</span>
                   </div>
                 )}
@@ -184,26 +184,7 @@ export default function Navbar() {
         </div>
       </div>
 
-{/* Mobile Search Full Width Overlay */}
-{/* {isSearchOpen && (
-        <div className="absolute inset-0 bg-[#000000] flex items-center px-4 sm:hidden z-20">
-          <Search size={18} className="text-gray-400" />
-          <input
-            ref={searchInputRef}
-            type="text"
-            placeholder="Search..."
-            className="ml-2 flex-1 bg-transparent text-white placeholder-gray-400 focus:outline-none text-sm"
-          />
-          <button
-            onClick={() => setIsSearchOpen(false)}
-            className="ml-2 text-gray-400 hover:text-white"
-          >
-            <CircleX size={22} />
-          </button>
-        </div>
-      )} */}
-
-      <DisclosurePanel className="sm:hidden">
+      <DisclosurePanel className="sm:hidden origin-top">
         <div className="space-y-1 px-2 pt-2 pb-3">
           {navigation.map((item) => (
             <DisclosureButton
@@ -222,6 +203,8 @@ export default function Navbar() {
 
         </div>
       </DisclosurePanel>
+
+
     </Disclosure>
 
     {/* Sidebar Component */}

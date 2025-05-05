@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowDownToDot, ArrowUpFromDot, FilmIcon, PartyPopper, StarIcon, UsersIcon } from "lucide-react";
 
 function classNames(...classes) {
@@ -11,9 +11,9 @@ function classNames(...classes) {
 export const AdminDashboard = () => {
 
     const [stats, setStats] = useState([
-      { id: 1, name: 'Total Users', stat: '0', icon: UsersIcon, change: '0', changeType: 'increase' },
-      { id: 2, name: 'Total Movies', stat: '0', icon: FilmIcon, change: '0', changeType: 'Decreased' },
-      { id: 3, name: 'Total Reviews', stat: '0', icon: StarIcon, change: '0', changeType: 'increase' },
+      { id: 1, name: 'Total Users', stat: '0', icon: UsersIcon, change: '0', changeType: 'increase', path:'users'},
+      { id: 2, name: 'Total Movies', stat: '0', icon: FilmIcon, change: '0', changeType: 'Decreased', path:'movies' },
+      { id: 3, name: 'Total Reviews', stat: '0', icon: StarIcon, change: '0', changeType: 'increase', path:'reviews' },
     ]);
   
   const { isAdminAuth } = useSelector((state) => state.admin);
@@ -39,9 +39,9 @@ export const AdminDashboard = () => {
       // ]);
 
       setStats([
-        { id: 1, name: 'Total Users', stat: '13', icon: UsersIcon, change: '10', changeType: 'increase' },
-        { id: 2, name: 'Total Movies', stat: '58', icon: FilmIcon, change: '4', changeType: 'Decreased' },
-        { id: 3, name: 'Total Reviews', stat: '210', icon: StarIcon, change: '15', changeType: 'increase' },
+        { id: 1, name: 'Total Users', stat: '14', icon: UsersIcon, change: '10', changeType: 'increase', path:'users'},
+        { id: 2, name: 'Total Movies', stat: '58', icon: FilmIcon, change: '4', changeType: 'Decreased', path:'movies' },
+        { id: 3, name: 'Total Reviews', stat: '210', icon: StarIcon, change: '15', changeType: 'increase', path:'reviews'  },
       ]);
     } catch (error) {
       console.error('Failed to fetch admin stats:', error);
@@ -88,9 +88,9 @@ export const AdminDashboard = () => {
               </p>
               <div className="absolute inset-x-0 bottom-0 bg-gray-100 dark:bg-gray-900 px-4 py-4 sm:px-6">
                 <div className="text-sm">
-                  <a href="#" className="font-medium text-yellow-600 hover:text-indigo-500">
+                  <Link to={item.path} className="font-medium text-yellow-600 hover:text-indigo-500">
                     View all<span className="sr-only"> {item.name} stats</span>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </dd>
