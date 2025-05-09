@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton"
 
-export const MoviecardSkeltons = ({ count = 8 }) => {
+export const MoviecardSkeltons = ({ count = 10 }) => {
   return (
     <div className="max-w-7xl mx-auto mt-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-5 px-4">
       {Array(count).fill(null).map((_, index) => (
