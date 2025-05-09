@@ -11,7 +11,7 @@ import React from "react"
         {movies?.avgRating > 0 ? movies.avgRating.toFixed(1) : "N/A"}
         </span>
 
-        <div className="w-full h-72 overflow-hidden rounded-t-sm mb-2 hover:opacity-80 dark:hover:opacity-40 transition-opacity duration-500">
+        <div className="w-full h-64 overflow-hidden rounded-t-sm mb-2 hover:opacity-80 dark:hover:opacity-40 transition-opacity duration-500">
         <Link to={`/moviesDetails/${movies?._id}`}>
           <img className="rounded-b-xs w-full h-full object-cover hover:scale-105 active:scale-105 transition-all duration-300 ease-in-out" 
           src={movies?.image} alt={movies?.title} />
@@ -20,7 +20,7 @@ import React from "react"
 
         <div className="px-2 pb-2">
           <Link to={`/moviesDetails/${movies?._id}`} className="group">
-            <h5 className="text-lg tracking-wide text-gray-900 dark:text-white group-hover:text-yellow-700 dark:group-hover:text-yellow-500 
+            <h5 className="text-base sm:text-lg tracking-wide text-gray-900 dark:text-white group-hover:text-yellow-700 dark:group-hover:text-yellow-500 
                  transition-colors duration-200">
               {movies.title}
             </h5>
