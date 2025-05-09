@@ -5,13 +5,13 @@ import React from "react"
 
 
     return (
-      <div className="relative w-full max-w-xs mx-auto bg-white border overflow-hidden border-gray-200 rounded-sm drop-shadow-2xl dark:drop-shadow-none dark:bg-neutral-950 dark:border-neutral-900 mb-6">
+      <div className="relative w-full mx-auto bg-white border overflow-hidden border-gray-200 rounded-sm drop-shadow-2xl dark:drop-shadow-none dark:bg-zinc-900 dark:border-neutral-900 mb-6">
 
         <span className="absolute top-0 right-0 bg-[#F8B319] text-zinc-900 text-lg px-3 py-1 rounded-tr-sm rounded-bl-2xl shadow-md" id="logo-name">
         {movies?.avgRating > 0 ? movies.avgRating.toFixed(1) : "N/A"}
         </span>
 
-        <div className="w-full h-64 overflow-hidden rounded-t-sm mb-2 hover:opacity-80 dark:hover:opacity-40 transition-opacity duration-500">
+        <div className="w-full h-72 overflow-hidden rounded-t-sm mb-2 hover:opacity-80 dark:hover:opacity-40 transition-opacity duration-500">
         <Link to={`/moviesDetails/${movies?._id}`}>
           <img className="rounded-b-xs w-full h-full object-cover hover:scale-105 active:scale-105 transition-all duration-300 ease-in-out" 
           src={movies?.image} alt={movies?.title} />

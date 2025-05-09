@@ -64,15 +64,15 @@ export const MoviesDetails = () => {
 
       <section className="py-8 md:py-16 antialiased">
         <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
-          <div className="lg:grid lg:grid-cols-2 lg:gap-8">
+          <div className="lg:grid lg:grid-cols-2">
 
             <div className="shrink-0 max-w-md lg:max-w-lg mx-auto">
-              <div className="w-full sm:w-96 h-96 overflow-hidden rounded-2xl">
-                <img className="p-0.5 w-full rounded-2xl h-full object-cover" src={movieDetails.image} alt="" />
+              <div className="w-full h-116 lg:w-80 lg:h-96 overflow-hidden rounded-3xl">
+                <img className="p-0.5 w-full rounded-3xl h-full object-cover" src={movieDetails.image} loading="lazy" alt="" />
               </div>
             </div>
 
-            <div className="mt-6 sm:mt-8 lg:mt-0">
+            <div className="mt-6 sm:mt-8 lg:mt-0 lg:-m-4">
               <h1 className="text-xl font-semibold text-gray-900 sm:text-3xl dark:text-white">
                 {movieDetails.title}
               </h1>
@@ -89,7 +89,7 @@ export const MoviesDetails = () => {
               </div>
 
               <div className="my-2">
-                <p className="text-xl font-extrabold text-gray-900 dark:text-white">{movieDetails.genre}</p>
+              <p className="text-base sm:text-lg font-extrabold text-gray-900 dark:text-white">{movieDetails.genre}</p>
 
                 <div className="flex items-center gap-2 sm:gap-3.5 mt-1">
                   <div className="flex items-center gap-0.5">
@@ -123,20 +123,19 @@ export const MoviesDetails = () => {
               </div>
 
               <div className="">
-                {/* <h3 className="underline underline-offset-4 mb-1">Description :</h3> */}
-                <p className="text-gray-700 dark:text-gray-300 first-letter:uppercase">
+                <p className="text-gray-700 dark:text-gray-300 first-letter:uppercase md:max-w-[95%]">
                   {movieDetails.description}
                 </p>
               </div>
 
               <div className="my-2.5">
                 {movieDetails?.directedBy && (
-                  <p className="text-base text-[#2a2c32] font-semibold dark:text-gray-300 mt-1">
+                  <p className="text-base text-[#2a2c32] font-semibold dark:text-gray-300 mt-1 md:max-w-[95%]">
                     <span className="font-semibold text-[#f8b319]">Director :</span> {movieDetails.directedBy}
                   </p>
                 )}
                 {movieDetails?.cast && Array.isArray(movieDetails.cast) && (
-                  <p className="text-base text-[#2a2c32] font-semibold dark:text-gray-300">
+                  <p className="text-base text-[#2a2c32] font-semibold dark:text-gray-300 md:max-w-[95%]">
                     <span className="font-semibold text-[#f8b319]">Cast :</span> {movieDetails.cast.join(", ")}
                   </p>
                 )}
