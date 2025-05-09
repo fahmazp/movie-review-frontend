@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 export const MoviecardSkeltons = ({ count = 8 }) => {
   return (
-    <div className="max-w-7xl mx-auto mt-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4">
+    <div className="max-w-7xl mx-auto mt-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-5 px-4">
       {Array(count).fill(null).map((_, index) => (
         <div key={index} className="w-full max-w-xs rounded-md border dark:border-zinc-800 border-zinc-300 p-4">
           <div className="flex flex-col space-y-3">
