@@ -1,7 +1,9 @@
 import { useFetch } from "@/hooks/useFetch";
-import { CircleX, Plus, SquareX, Star } from 'lucide-react';
+import { Plus, Star } from 'lucide-react';
 import { useState } from "react";
 import { ReviewDialog } from "./ReviewDialog";
+import { axiosInstance } from "@/config/axiosInstance";
+import toast from "react-hot-toast";
 
 export const UserReviews = () => {
   
@@ -21,6 +23,19 @@ export const UserReviews = () => {
     setOpen(true);
   };
 
+  const deleteReview = async (reviewId) => {
+    try {
+    const confirm = window.confirm("Are you sure you want to delete this review?")
+    if (!confirm) return
+      
+      await axiosInstance.delete(`reviews/delete-review/${reviewId}`)
+      toast.success("Review deleted successfully")
+      window.location.reload()
+    } catch (error) {
+      console.error("Failed to delete review:", error)
+      toast.error("Failed to delete review. Try again!")
+    }
+  }
 
   if (isProfileLoading || isReviewLoading || !userId) {
     return <div className="text-center">Loading reviews...</div>;
@@ -34,7 +49,7 @@ export const UserReviews = () => {
   return (
     <div className="mx-auto max-w-7xl px-2 pb-2 sm:px-8">
         <h2 className="text-2xl font-semibold mb-1">My Reviews</h2>
-        <span class="inline-flex items-center rounded-md bg-yellow-100 px-2 py-1 text-sm font-medium text-yellow-700 ring-1 ring-yellow-600/20 ring-inset">{reviewData.length} reviews</span>
+        <span className="inline-flex items-center rounded-md bg-yellow-100 px-2 py-1 text-sm font-medium text-yellow-700 ring-1 ring-yellow-600/20 ring-inset">{reviewData.length} reviews</span>
         <ul role="list" className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 mt-2">
         {reviewData?.length > 0 ? (
           reviewData.map((review) => (
@@ -69,11 +84,12 @@ export const UserReviews = () => {
                   </div>
                 </div>
 
-                  <button className="text-sm text-red-400">Delete Review
+                  <button className="text-sm text-red-400"
+                  onClick={() => deleteReview(review._id)}
+                  >Delete Review
                   <svg className="ml-1 inline-block w-[22px] h-[22px] text-red-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                    <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm7.707-3.707a1 1 0 0 0-1.414 1.414L10.586 12l-2.293 2.293a1 1 0 1 0 1.414 1.414L12 13.414l2.293 2.293a1 1 0 0 0 1.414-1.414L13.414 12l2.293-2.293a1 1 0 0 0-1.414-1.414L12 10.586 9.707 8.293Z" clip-rule="evenodd"/>
+                    <path fillRule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm7.707-3.707a1 1 0 0 0-1.414 1.414L10.586 12l-2.293 2.293a1 1 0 1 0 1.414 1.414L12 13.414l2.293 2.293a1 1 0 0 0 1.414-1.414L13.414 12l2.293-2.293a1 1 0 0 0-1.414-1.414L12 10.586 9.707 8.293Z" clipRule="evenodd"/>
                   </svg>
-                  {/* <SquareX color="currentColor" fill="red"/> */}
                   </button>
               </div>
             </li>
