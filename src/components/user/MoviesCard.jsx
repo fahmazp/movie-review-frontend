@@ -14,7 +14,7 @@ import React from "react"
         <div className="w-full h-64 overflow-hidden rounded-t-sm mb-2 hover:opacity-80 dark:hover:opacity-40 transition-opacity duration-500">
         <Link to={`/moviesDetails/${movies?._id}`}>
           <img className="rounded-b-xs w-full h-full object-cover hover:scale-105 active:scale-105 transition-all duration-300 ease-in-out" 
-          src={movies?.image} alt={movies?.title} />
+          src={movies?.image} alt={movies?.title} loading="lazy" />
         </Link>
         </div>
 
