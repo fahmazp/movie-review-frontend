@@ -3,7 +3,7 @@ import { useFetch } from "@/hooks/useFetch";
 
 export const useMovieSearch = () => {
   const [searchText, setSearchText] = useState("");
-  const [allMovies] = useFetch("/movie/allMovies");
+  const [allMovies] = useFetch("/movie/allMovies?limit=100");
   const [filteredMovies, setFilteredMovies] = useState([]);
 
   const handleSearchChange = (e) => {

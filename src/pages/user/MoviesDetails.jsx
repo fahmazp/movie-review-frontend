@@ -64,7 +64,7 @@ export const MoviesDetails = () => {
 
       <section className="py-8 md:py-16 antialiased">
         <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
-          <div className="lg:grid lg:grid-cols-2">
+          <div className="lg:grid lg:grid-cols-2 mb-5">
 
             <div className="shrink-0 max-w-md lg:max-w-lg mx-auto">
               <div className="w-full h-116 lg:w-80 lg:h-96 overflow-hidden rounded-3xl">

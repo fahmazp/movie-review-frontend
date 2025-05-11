@@ -21,8 +21,8 @@ export const MovieReviews = ({ movieId }) => {
 //   const reviews = data || [];
     
     if (isLoading) return <p className="text-center">Loading reviews...</p>
+    if (!Array.isArray(reviews) || reviews.length === 0) return <p className="text-center md:text-lg text-green-600 font-semibold">No reviews yet!</p>
     if (error) return <p className="text-red-500 text-center">Error loading reviews</p>
-    if (!Array.isArray(reviews) || reviews.length === 0) return <p className="text-center">No reviews yet!</p>
 
     const handleOpenReview = (review) => {
         setSelectedReview(review);
