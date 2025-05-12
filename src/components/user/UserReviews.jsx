@@ -58,12 +58,23 @@ export const UserReviews = () => {
               className="col-span-1 flex flex-col divide-y divide-yellow-300 rounded-lg bg-white dark:bg-[#000000] text-center shadow-sm ring-1 ring-gray-900/5 dark:ring-gray-200/10 border border-amber-200"
             >
               <div className="flex flex-1 flex-col p-3">
-                <img
+                {/* <img
                   alt="Reviewed item"
                   src={review?.movieId.image || "/placeholder.png"}
                   className="mx-auto size-44 shrink-0 rounded object-cover"
-                />
-                <h3 className="mt-2 text-base font-semibold text-gray-900 dark:text-gray-200">{review.movieId.title}</h3>
+                /> */}
+                  {review?.movieId ? (
+                    <img
+                      alt="Reviewed item"
+                      src={review.movieId.image || "/placeholder.png"}
+                      className="mx-auto size-44 shrink-0 rounded object-cover"
+                    />
+                  ) : (
+                    <div className="mx-auto size-44 shrink-0 flex items-center justify-center bg-gray-200 rounded text-gray-500">
+                      No Image
+                    </div>
+                  )}                
+                <h3 className="mt-2 text-base font-semibold text-gray-900 dark:text-gray-200">{review.movieId?.title || "Deleted Movie"}</h3>
                 <dl className="mt-0.5 flex grow flex-col justify-between">
                   <dt className="sr-only">Rating</dt>
                   <dd className="text-sm text-gray-600 dark:text-gray-300 font-semibold"> 
