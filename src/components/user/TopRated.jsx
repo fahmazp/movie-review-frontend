@@ -13,7 +13,6 @@ export default function HomePage() {
       try {
         const API_KEY = '313f8af1';
         
-        // List of IMDb IDs
         const imdbIDs = ['tt4154756', 'tt31193180', 'tt10505918', 'tt3566834', 'tt12299608',  'tt31945132', 'tt0388629', 'tt20969586', 'tt10676052', 'tt6208148', 'tt14123284' ];
 
         // Fetching movie data using Promise.all
@@ -45,7 +44,7 @@ export default function HomePage() {
     <div className="flex flex-col gap-12 p-6 xl:p-10">
       <section>
         <div className="flex items-center justify-between mb-0">
-          <h2 className="text-3xl text-[#e69e03] font-bold">Trending Now</h2>
+          <h2 className="text-2xl md:text-3xl text-[#e69e03] font-bold">Trending Now</h2>
           <Link to="/movies" className="text-sm text-[#eca308] font-semibold hover:underline hover:underline-offset-3">See all</Link>
         </div>
         
@@ -74,7 +73,7 @@ export default function HomePage() {
 
       <section>
   <div className="flex items-center justify-between mb-4">
-    <h2 className="text-3xl text-[#e69e03] font-bold">Top Rated</h2>
+    <h2 className="text-2xl md:text-3xl text-[#e69e03] font-bold">Top Rated</h2>
     <Link to="/movies" className="text-sm text-[#eca308] font-semibold hover:underline hover:underline-offset-3">See all</Link>
   </div>
   <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">

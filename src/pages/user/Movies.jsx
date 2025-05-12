@@ -49,7 +49,7 @@ export const Movies = ({ type }) => {
   return (
     <>
       <BreadcrumbsLink />
-      <div className="mx-auto mt-16 max-w-7xl grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 mb-2 md:mb-5 sm:gap-5 px-2 sm:px-4">
+      <div className="mx-auto mt-16 max-w-7xl grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 mb-2 md:mb-5 sm:gap-5 px-2.5 sm:px-4">
         {movieData.map((value) => (
           <Moviescard movies={value} key={value._id} />
         ))}
