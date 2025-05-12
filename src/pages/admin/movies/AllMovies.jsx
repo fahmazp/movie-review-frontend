@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { axiosInstance } from "@/config/axiosInstance";
 import { useNavigate } from "react-router-dom";
 import AddMovieDialog from "@/components/admin/AddMovieDialog";
+import toast from "react-hot-toast";
 
 const MoviesDashboard = () => {
   const [movies, setMovies] = useState([]);
@@ -10,7 +11,7 @@ const MoviesDashboard = () => {
 
   const fetchMovies = async () => {
     try {
-      const res = await axiosInstance.get("/movie/allMovies");
+      const res = await axiosInstance.get("/movie/allMovies?limit=200");
       setMovies(res.data.data || []);
     } catch (err) {
       console.error("Error fetching movies:", err);
@@ -22,6 +23,21 @@ const MoviesDashboard = () => {
   useEffect(() => {
     fetchMovies();
   }, [])
+
+const handleDelete = async (movieId, title) => {
+  const confirm = window.confirm(`Are you sure you want to delete "${title}"?`)
+  if (!confirm) return
+
+    try {
+      await axiosInstance.delete(`movie/delete-movie/${movieId}`)
+      toast.success(`"${title}" deleted successfully!`)
+      fetchMovies();
+    } catch (error) {
+    console.error("Error deleting movie:", error);
+    toast.error("Failed to delete movie. Check console.");
+    }
+}
+
 
   if (loading) return <p className="p-4">Loading movies...</p>;
 
@@ -38,7 +54,7 @@ const MoviesDashboard = () => {
               <th className="px-3 py-2">Release Year</th>
               <th className="px-3 py-2">Image</th>
               <th className="px-3 py-2">Status</th>
-              <th className="px-3 py-2">Actions</th>
+              <th className="px-3 py-2 text-center" colSpan="2">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -60,15 +76,24 @@ const MoviesDashboard = () => {
                     <span className="text-red-500 font-medium">Inactive</span>
                   )}
                 </td>
-                <td className="px-4 py-2 space-x-2">
+                <td className="px-2 py-2 space-x-2">
                   <button
                     onClick={() => navigate(`/admin/movies/edit/${movie._id}`)}
-                    className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
+                    className="px-2.5 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
                   >
                     Edit
                   </button>
-                  {/* Optional view button or delete */}
                 </td>
+
+                <td className="px-2 py-2 space-x-2">
+                  <button
+                    onClick={() => handleDelete(movie._id, movie.title)}
+                    className="px-1.5 py-1 bg-red-500 text-white rounded hover:bg-red-700"
+                  >
+                    Delete
+                  </button>
+                </td>
+                
               </tr>
             ))}
           </tbody>

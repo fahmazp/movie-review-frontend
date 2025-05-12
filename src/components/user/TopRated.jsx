@@ -49,8 +49,8 @@ export default function HomePage() {
         </div>
         
         <div className='flex gap-1'>
-        <span className="dark:text-[#FFFFFFB3]">Scroll right</span>
-        <ChevronRight color="#F8B319"/>
+        <span className="dark:text-[#FFFFFFB3] text-xs md:text-base">Scroll right</span>
+        <ChevronRight className="h-4 md:h-5.5" color="#F8B319"/>
         </div>
 
         <div className="flex gap-6 overflow-x-auto scrollbar-hide mt-2 snap-x snap-mandatory">

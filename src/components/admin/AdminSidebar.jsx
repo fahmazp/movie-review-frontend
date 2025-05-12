@@ -136,10 +136,10 @@ export default function AdminSidebar() {
                       location.pathname === item.to
                         ? 'bg-zinc-900 text-white'
                         : 'text-indigo-200 hover:bg-neutral-950 hover:text-white',
-                      'group flex gap-x-3 rounded p-2 text-sm font-semibold',
+                      'group flex gap-x-3 rounded p-2 text-xs font-semibold',
                     )}
                   >
-                    <item.icon className="h-5 w-5 shrink-0" />
+                    <item.icon className="h-4 w-4 shrink-0" />
                     {item.name}
                   </Link>
                       </li>
