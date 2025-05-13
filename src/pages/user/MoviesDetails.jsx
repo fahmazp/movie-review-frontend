@@ -143,7 +143,7 @@ export const MoviesDetails = () => {
 
               <div className="flex gap-4">
                 <RippleButton 
-                bgColor="border-[#F8B319] hover:bg-yellow-600" 
+                bgColor="border-[#F8B319] hover:bg-yellow-600 focus:bg-yellow-600" 
                 textColor="text-[#F8B319] hover:text-white" 
                 onClick={handleAddToWatchlist}
                 disabled={isInWatchlist}
