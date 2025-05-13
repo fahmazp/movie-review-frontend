@@ -13,13 +13,27 @@ function App() {
     const adminInfo = localStorage.getItem('adminInfo');
     const userInfo = localStorage.getItem('userInfo');
   
-    if (adminInfo) {
+    const cookieExists = document.cookie.includes('token=');
+    if (!cookieExists && userInfo) {
+      localStorage.removeItem('userInfo');
+      dispatch(clearUser());
+    }
+
+    // if (adminInfo) {
+    //   dispatch(clearUser());
+    //   dispatch(saveAdmin(JSON.parse(adminInfo)));
+    // } else if (userInfo) {
+    //   dispatch(clearAdmin());
+    //   dispatch(saveUser(JSON.parse(userInfo)));
+    // }
+    if (adminInfo && cookieExists) {
       dispatch(clearUser());
       dispatch(saveAdmin(JSON.parse(adminInfo)));
-    } else if (userInfo) {
+    } else if (userInfo && cookieExists) {
       dispatch(clearAdmin());
       dispatch(saveUser(JSON.parse(userInfo)));
     }
+
   }, []);
   
 

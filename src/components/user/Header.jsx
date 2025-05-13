@@ -12,6 +12,7 @@ import toast from 'react-hot-toast';
 import Sidebar from './Sidebar';
 import { NavSearch } from './Navbar-search';
 import { useMovieSearch } from '@/hooks/useMovieSearch';
+import { clearAdmin } from '@/redux/features/adminSlice';
 
 const navigation = [
   { name: "Home", path: "/" },
@@ -42,11 +43,12 @@ export default function Navbar() {
   const handleLogout = async () => {
     try {
       await axiosInstance.get("/user/logout", { withCredentials: true });
-      localStorage.removeItem("userInfo");
-      window.location.href = "/login"; // hard reload clears state too
-      dispatch(clearUser());
-      toast.success("You've been logged out");
-      navigate("/login");
+          localStorage.removeItem("userInfo");
+          localStorage.removeItem("adminInfo");
+          dispatch(clearUser());
+          dispatch(clearAdmin());
+          toast.success("You've been logged out");
+          navigate("/login");
     } catch (err) {
       console.error("Logout failed:", err);
       toast.error("Logout failed, please try again.");
