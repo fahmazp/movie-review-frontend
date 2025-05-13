@@ -6,7 +6,7 @@ import { axiosInstance } from "@/config/axiosInstance"
 import { MovieReviews } from "@/components/user/MovieReviews"
 import { PostReview } from "@/components/user/PostReview"
 import RippleButton from "@/components/user/ripple-btn"
-import { Check, Dot, Play, Plus } from 'lucide-react';
+import { Check, Dot, LoaderCircle, Play, Plus } from 'lucide-react';
 import toast from "react-hot-toast"
 import { Confetti } from "@/components/magicui/confetti"
 
@@ -16,7 +16,7 @@ export const MoviesDetails = () => {
 
   const [movieDetails, isLoading, error] = useFetch(`/movie/movieDetails/${params?.id}`) //url from backend 
   const [avgRating, isRatingLoading, ratingError] = useFetch(`/reviews/avg-rating/${params?.id}`)
-  const [reviews, isReviewsLoading, reviewsError] = useFetch(`/reviews/movie-reviews/${params?.id}`);
+  const [reviews] = useFetch(`/reviews/movie-reviews/${params?.id}`);
 
   const [isInWatchlist, setIsInWatchlist] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
@@ -53,6 +53,11 @@ export const MoviesDetails = () => {
       }
     }
   }
+
+if (isLoading) return <div className="flex items-center justify-center min-h-screen">
+                     <LoaderCircle className="w-7 h-7 animate-spin text-yellow-500" />
+                      </div>
+if (error) return <p className="text-center text-red-500">Some error occured !</p>
 
   return (
     <div className="relative">
