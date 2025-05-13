@@ -42,6 +42,8 @@ export default function Navbar() {
   const handleLogout = async () => {
     try {
       await axiosInstance.get("/user/logout", { withCredentials: true });
+      localStorage.removeItem("userInfo");
+      window.location.href = "/login"; // hard reload clears state too
       dispatch(clearUser());
       toast.success("You've been logged out");
       navigate("/login");

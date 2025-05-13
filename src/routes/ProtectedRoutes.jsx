@@ -1,3 +1,4 @@
+import { SpokeSpinner } from "@/components/user/spinner"
 import React, { useEffect } from "react"
 import { useSelector } from "react-redux"
 import { Outlet, useNavigate } from "react-router-dom"
@@ -14,7 +15,7 @@ export const ProtectedRoutes = () => {
       }
     }, [isCheckingAuth, isUserAuth])
     
-    if (isCheckingAuth) return null //Don't render until check is complete
+    if (isCheckingAuth) return <SpokeSpinner/> //Don't render until check is complete
 
     return <Outlet />
 
