@@ -6,9 +6,10 @@ import { axiosInstance } from "@/config/axiosInstance"
 import { MovieReviews } from "@/components/user/MovieReviews"
 import { PostReview } from "@/components/user/PostReview"
 import RippleButton from "@/components/user/ripple-btn"
-import { Check, Dot, LoaderCircle, Play, Plus } from 'lucide-react';
+import { Check, Dot, Play, Plus } from 'lucide-react';
 import toast from "react-hot-toast"
 import { Confetti } from "@/components/magicui/confetti"
+import { SpokeSpinner } from "@/components/user/spinner"
 
 export const MoviesDetails = () => {
 
@@ -55,7 +56,7 @@ export const MoviesDetails = () => {
   }
 
 if (isLoading) return <div className="flex items-center justify-center min-h-screen">
-                     <LoaderCircle className="w-7 h-7 animate-spin text-yellow-500" />
+                     <SpokeSpinner className="w-7 h-7" />
                       </div>
 if (error) return <p className="text-center text-red-500">Some error occured !</p>
 
@@ -148,7 +149,7 @@ if (error) return <p className="text-center text-red-500">Some error occured !</
 
               <div className="flex gap-4">
                 <RippleButton 
-                bgColor="border-[#F8B319] hover:bg-yellow-600 focus:bg-yellow-600" 
+                bgColor="border-[#F8B319] hover:bg-yellow-600 " 
                 textColor="text-[#F8B319] hover:text-white" 
                 onClick={handleAddToWatchlist}
                 disabled={isInWatchlist}
