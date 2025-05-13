@@ -56,9 +56,8 @@ export const MoviesDetails = () => {
   }
 
 if (isLoading) return <div className="flex items-center justify-center min-h-screen">
-                     <SpokeSpinner className="w-7 h-7" />
+                     <SpokeSpinner size="lg" />
                       </div>
-if (error) return <p className="text-center text-red-500">Some error occured !</p>
 
   return (
     <div className="relative">
@@ -149,7 +148,7 @@ if (error) return <p className="text-center text-red-500">Some error occured !</
 
               <div className="flex gap-4">
                 <RippleButton 
-                bgColor="border-[#F8B319] hover:bg-yellow-600 " 
+                bgColor="border-[#F8B319] hover:bg-yellow-600" 
                 textColor="text-[#F8B319] hover:text-white" 
                 onClick={handleAddToWatchlist}
                 disabled={isInWatchlist}

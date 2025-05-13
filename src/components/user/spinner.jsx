@@ -11,7 +11,6 @@ const sizesClasses = {
 
 const strokeClasses = {
   gray: "stroke-foreground",
-  blue: "stroke-blue-500",
   red: "stroke-red-500",
   green: "stroke-emerald-500",
   yellow: "stroke-yellow-500",

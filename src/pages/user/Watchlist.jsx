@@ -62,7 +62,7 @@ export const WatchlistPage = () => {
   }
 
   return (
-    <div className="max-w-screen-xl mx-auto mt-1.5 md:mt-8 p-6">
+    <div className="max-w-screen-xl mx-auto mt-1.5 md:mt-8 p-2.5 md:p-6">
       
       <h1 className="text-2xl sm:text-4xl font-bold mb-2.5">My Watchlist 
         <Clapperboard size={18} className="inline-block ml-2"/>
@@ -83,12 +83,12 @@ export const WatchlistPage = () => {
       </span>
       </div>
 
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid gap-2 md:gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
         {watchlist.map((movie) => (
           <Card key={movie._id} className="py-1 rounded-sm  hover:drop-shadow-xl transition duration-300">
-              <CardContent className="p-3 flex flex-col items-center">
+              <CardContent className="p-1.5 flex flex-col items-center">
               <Link to={`/moviesDetails/${movie.movieId}`} className="w-full">
-              <div className="relative w-full h-60 mb-3">
+              <div className="relative w-full h-48 md:h-64 mb-3">
                 <img
                   src={movie.posterUrl}
                   alt={movie.title}
@@ -98,10 +98,10 @@ export const WatchlistPage = () => {
               </Link>    
               
                 <div className="flex flex-col items-center gap-2 w-full">
-                  <h2 className="text-base text-center md:truncate md:w-full">{movie.title}</h2>
+                  <h2 className="text-base text-center">{movie.title}</h2>
 
                   <div className="flex items-center justify-between w-full">  
-                  <span className="inline-flex items-center bg-gradient-to-r from-amber-100 to-yellow-400 ring-1 ring-yellow-500/50 text-neutral-900 text-[13px] px-2 py-1 rounded-sm shadow-md" 
+                  <span className="inline-flex items-center bg-gradient-to-r from-amber-100 to-yellow-400 ring-1 ring-yellow-500/50 text-neutral-900 text-[13px] px-1 py-1 rounded-sm shadow-md" 
                   id="logo-name">
                     <Star size={16} className="mr-1" color="#d97706" />
                     {movie.rating?.toFixed(1) || "N/A"}
@@ -109,7 +109,7 @@ export const WatchlistPage = () => {
 
                   <Button variant="destructive" 
                   onClick={() => watchlistRemove(movie.movieId)}
-                  className="h-full w-20 md:w-10 rounded flex items-center justify-center hover:bg-red-800"> 
+                  className="h-full w-10 rounded flex items-center justify-center hover:bg-red-800"> 
                   <Trash/>
                   </Button>
                   </div>
