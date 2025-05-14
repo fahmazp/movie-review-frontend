@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { axiosInstance } from "@/config/axiosInstance";
+import { Button } from "@headlessui/react";
+import toast from "react-hot-toast";
 
 const UsersDashboard = () => {
   const [users, setUsers] = useState([]);
@@ -22,6 +23,38 @@ const UsersDashboard = () => {
     fetchUsers();
   }, []);
 
+// block-user & unblock-user -
+const handleDeactivate = async (userId) => {
+  try {
+    await axiosInstance.put(`/admin/block-user/${userId}`);
+    setUsers((prevUsers) =>
+      prevUsers.map((user) =>
+        user._id === userId ? { ...user, isActive: false } : user
+      )
+    )
+    toast.success("User deactivated successfully!")
+  } catch (err) {
+    toast.error("Failed to deactivate user")
+    console.error("Failed to deactivate user", err);
+  }
+};
+
+const handleActivate = async (userId) => {
+  try {
+    await axiosInstance.put(`/admin/unblock-user/${userId}`);
+    setUsers((prevUsers) =>
+      prevUsers.map((user) =>
+        user._id === userId ? { ...user, isActive: true } : user
+      )
+    )
+    toast.success("User activated successfully!")
+  } catch (err) {
+    toast.error("Failed to activate user")
+    console.error("Failed to activate user", err);
+  }
+};
+
+
   if (loading) return <p>Loading users...</p>;
 
   return (
@@ -36,6 +69,7 @@ const UsersDashboard = () => {
               <th className="px-4 py-2 text-left">Mobile</th>
               <th className="px-4 py-2 text-left">Role</th>
               <th className="px-4 py-2 text-left">Status</th>
+              <th className="px-4 py-2 text-center">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -50,6 +84,18 @@ const UsersDashboard = () => {
                     <span className="text-green-500">Active</span>
                   ) : (
                     <span className="text-red-500">Inactive</span>
+                  )}
+                </td>
+
+                <td className="px-4 py-2 text-center">
+                  {user.isActive ? (
+                    <Button className="bg-red-500 text-white p-1 rounded-xs hover:bg-red-800"
+                     onClick={() => handleDeactivate(user._id)}
+                    >Block user</Button>
+                  ) : (
+                    <Button className="bg-green-400 text-white p-1 rounded-xs hover:bg-green-700"
+                     onClick={() => handleActivate(user._id)}
+                    >Unblock user</Button>
                   )}
                 </td>
               </tr>
