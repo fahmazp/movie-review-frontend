@@ -11,10 +11,10 @@ import { DotButton, useDotButton } from './EmblaCarouselDotButton'
 const moviesSlides = [
   { title: "Rick and Morty", src: "/posters/rick-and-morty.jpg" },
   { title: "Star Wars", src: "/posters/star-wars.jpg" },
+  { title: "Despicable Me 3", src: "/posters/despicable.jpg" },
   { title: "The Avengers", src: "/posters/avengers.jpg" },
-  { title: "Naruto", src: "/posters/naruto.jpg" },
+  { title: "Stranger Things", src: "/posters/st.jpg" },
   { title: "Game of Thrones", src: "/posters/got.jpg" },
-  { title: "Captain America: Civil War", src: "/posters/civilwar.jpg" },
   { title: "Interstellar", src: "/posters/interstellar-movie.jpg" },
 ]
 
