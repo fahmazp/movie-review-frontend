@@ -77,6 +77,15 @@
   --detail-medium-contrast: rgba(45, 45, 45, 0.772);
   --detail-high-contrast: rgba(255, 255, 255, 0.212);
   --text-body: #f59e0b;
+  
+}
+
+::selection {
+  background-color: #facc15;
+}
+
+.dark::selection {
+    background-color: #fde047;
 }
 
 @theme inline {
