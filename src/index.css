@@ -80,12 +80,12 @@
   
 }
 
-::selection {
+:root::selection {
   background-color: #facc15;
 }
 
 .dark::selection {
-    background-color: #fde047;
+    background-color: #eab308;
 }
 
 @theme inline {

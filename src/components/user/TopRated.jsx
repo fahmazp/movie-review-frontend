@@ -32,6 +32,8 @@ export default function HomePage() {
 
   const [topRatedMovies, isLoading, error] = useFetch("/reviews/top-rated-movies");
 
+  const [topActionMovies, isActionLoading, actionError] = useFetch("/movie/top-action");
+
   if (isLoading) return <div> <p className='text-center text-yellow-500'>Fetching movies....
     <Disc3 color="#e69e03" className='inline-block size-6 ml-1 motion-safe:animate-spin'/>
   </p>
@@ -71,19 +73,43 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section>
-  <div className="flex items-center justify-between mb-4">
-    <h2 className="text-2xl md:text-3xl text-[#e69e03] font-bold">Top Rated</h2>
-    <Link to="/movies" className="text-sm text-[#eca308] font-semibold hover:underline hover:underline-offset-3">See all</Link>
-  </div>
-  <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-    {topRatedMovies.map((movie) => (
-      <Moviescard movies={movie} key={movie._id} />
-    ))}
-  </div>
-</section>
+    <section>
+    <div className="flex items-center justify-between mb-4">
+      <h2 className="text-2xl md:text-3xl text-[#e69e03] font-bold">Top Rated</h2>
+      <Link to="/movies" className="text-sm text-[#eca308] font-semibold hover:underline hover:underline-offset-3">See all</Link>
+    </div>
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+      {topRatedMovies.map((movie) => (
+        <Moviescard movies={movie} key={movie._id} />
+      ))}
+    </div>
+  </section>
 
 
+    <section>
+    <div className="flex items-center justify-between mb-4">
+      <h2 className="text-2xl md:text-3xl text-[#e69e03] font-bold">Top Action</h2>
+      <Link to="/movies" className="text-sm text-[#eca308] font-semibold hover:underline hover:underline-offset-3">See all</Link>
+    </div>
+
+    {isActionLoading ? (
+    <>
+      <p className='text-center text-yellow-500'>
+        Fetching action movies... <Disc3 color="#e69e03" className='inline-block size-6 ml-1 motion-safe:animate-spin' />
+      </p>
+      <MoviecardSkeltons />
+    </>
+      ) : actionError ? (
+        <p className="text-center text-red-500">Failed to load action movies.</p>
+      ) : (
+    <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+      {topActionMovies.map((movie) => (
+        <Moviescard movies={movie} key={movie._id} />
+      ))}
+    </div>
+  )}
+
+  </section>      
 
     </div>
   );
