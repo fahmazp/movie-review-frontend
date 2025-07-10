@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom"
 import { ModeToggle } from "../shared/mode-toggle"
 
+const startYear = 2025;
+const currentYear = new Date().getFullYear();
+const displayYear = startYear === currentYear ? `${currentYear}` : `${startYear}–${currentYear}`;
+
 const navigation = {
   main: [
     { name: 'Movies', path: '/movies' },
@@ -70,19 +74,29 @@ export default function Footer() {
             <ModeToggle />    
             </div>    
         </div>
-        <p className="mt-10 text-center text-sm/6 text-gray-500">&copy; 2025 HoneyPopcorn, Inc. All rights reserved.</p>
-        <p className="text-center text-xs text-[#f8b319]">Crafted By Fahmaz Ashraf</p>
+        <p className="mt-10 text-center text-sm/6 text-gray-500">&copy; {displayYear} HoneyPopcorn, Inc. All rights reserved.</p>
+        <p className="text-center text-xs text-[#f8b319]">Crafted By <a href="https://fahmazashraf.vercel.app/" className="bg-gradient-to-br from-amber-500 via-lime-500 to-amber-600 dark:from-yellow-500 dark:via-lime-400 dark:to-amber-600 bg-clip-text text-transparent font-medium" target="_blank">Fahmaz Ashraf</a></p>
       </div>
 
-      <div aria-hidden="true" className="absolute top-0 left-1/2 -z-10 -translate-x-1/2 blur-3xl xl:-top-6">
+
+      <div aria-hidden="true" className="absolute inset-0 -z-10">
+        {/* Light Mode BG */}
         <div
+          className="block dark:hidden w-full h-full"
           style={{
-            clipPath:
-              'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+            background:
+              "radial-gradient(125% 125% at 50% 90%, #ffffff 40%, #f59e0b 100%)",
           }}
-          className="aspect-1155/678 w-[42.1875rem] bg-linear-to-tr from-[#a18649] to-[#f8b119e3] opacity-10"
+        />
+        {/* Dark Mode BG */}
+        <div
+          className="hidden dark:block w-full h-full"
+          style={{
+            background: "radial-gradient(125% 125% at 50% 100%, #000000 40%, #350136 100%)",
+          }}
         />
       </div>
+
 
     </footer>
   )

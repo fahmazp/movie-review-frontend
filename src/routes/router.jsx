@@ -76,35 +76,6 @@ export const router = createBrowserRouter([
     ],
   },
 
-  // {
-  //   path:"admin",
-  //   element: <AdminLayout/>,
-
-  //   children:[
-  //     {
-  //       path: "login",
-  //       element: <LoginPageform role="admin"/>
-  //     },
-  //     {
-  //       element: <AdminProtectedRoutes />,
-  //       children: [
-  //         {
-  //           path: "profile",
-  //           element: <AdminProfile />,
-  //         },
-  //         {
-  //           path: "users",
-  //           element: <UsersManagementPage />,
-  //         },
-  //         {
-  //           path: "movies",
-  //           element: <MoviesManagementPage />,
-  //         },        
-  //       ],
-  //     },
-      
-  //   ]
-  // }
   
   {
     path: "admin/login",
@@ -116,7 +87,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <AdminLayout />, // Layout starts here
+        element: <AdminLayout />, 
         children: [
           { path: "", element: <AdminDashboard /> },
           { path: "profile", element: <AdminProfile /> },

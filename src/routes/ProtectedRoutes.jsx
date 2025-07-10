@@ -14,15 +14,8 @@ export const ProtectedRoutes = () => {
       }
     }, [isCheckingAuth, isUserAuth])
     
-    if (isCheckingAuth) return <SpokeSpinner/> //Don't render until check is complete
+    if (isCheckingAuth) return <SpokeSpinner/>
 
-    // if (isCheckingAuth) return <SpokeSpinner /> 
-
-    // useEffect(() => {
-    //   if (!isCheckingAuth && !isUserAuth) {
-    //     navigate("/login", { replace: true });
-    //   }
-    // }, [isCheckingAuth, isUserAuth]);
 
     return <Outlet />
 
